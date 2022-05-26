@@ -69,12 +69,27 @@
         margin-right: 50px;
       }
 
-      #character-selection-div {
+      #player-1-character-selection-div,
+      #player-2-character-selection-div {
+        position: absolute; 
+      }
+
+      .player-name-and-character-description-div {
+        display:flex;
+        flex-direction: row;
+        margin-bottom: 20px;
+      }
+
+      .player-name-div {
+        margin-right: 20px;
+      }
+
+      #player-1-character-selection-images-div, 
+      #player-2-character-selection-images-div {
         display:flex;
         flex-direction: row;
 
-        position: absolute; 
-        top: 25%;
+        margin-bottom: 20px;
       }
 
       .character-images {
@@ -86,6 +101,9 @@
         margin-right: 10px;
       }
 
+      .lock-in-div {
+        float: right; 
+      }
     </style>
   </head>
 
@@ -124,36 +142,93 @@
           </div>
         </div>
 
-        <div id="character-selection-div">
-          <div class="character-images-div">
-            <img class="character-images"src="images/bunny.png">
+        <div id="player-1-character-selection-div">
+          <div class="player-name-and-character-description-div">
+            <div class="player-name-div">
+              <p id="player-1-name"></p>
+            </div>
+
+            <div class="character-description-div">
+              <p id="player-1-character-description"></p>
+            </div>
           </div>
-          <div class="character-images-div">
-            <img class="character-images"src="images/turtle.png">
+
+          <div id="player-1-character-selection-images-div">
+            <div class="character-images-div">
+              <img class="character-images"src="images/bunny.png">
+            </div>
+            <div class="character-images-div">
+              <img class="character-images"src="images/turtle.png">
+            </div>
+            <div class="character-images-div">
+              <img class="character-images"src="images/genghiskhan.webp">
+            </div>
+            <div class="character-images-div">
+              <img class="character-images" src="images/doctorstrange.webp">
+            </div>
+            <div class="character-images-div">
+              <img class="character-images" src="images/scarletwitch.webp">
+            </div>
+            <div>
+              <img class="character-images" src="images/steve.jpg">
+            </div>
           </div>
-          <div class="character-images-div">
-            <img class="character-images"src="images/genghiskhan.webp">
-          </div>
-          <div class="character-images-div">
-            <img class="character-images" src="images/doctorstrange.webp">
-          </div>
-          <div class="character-images-div">
-            <img class="character-images" src="images/scarletwitch.webp">
-          </div>
-          <div>
-            <img class="character-images" src="images/steve.jpg">
+
+          <div class="lock-in-div">
+            <button>LOCK IN</button>
           </div>
         </div>
+
+
+        <div id="player-2-character-selection-div">
+          <div class="player-name-and-character-description-div">
+            <div class="player-name-div">
+              <p id="player-2-name"></p>
+            </div>
+
+            <div class="character-description-div">
+              <p id="player-1-character-description"></p>
+            </div>
+          </div>
+
+          <div id="player-2-character-selection-images-div">
+            <div class="character-images-div">
+              <img class="character-images"src="images/bunny.png">
+            </div>
+            <div class="character-images-div">
+              <img class="character-images"src="images/turtle.png">
+            </div>
+            <div class="character-images-div">
+              <img class="character-images"src="images/genghiskhan.webp">
+            </div>
+            <div class="character-images-div">
+              <img class="character-images" src="images/doctorstrange.webp">
+            </div>
+            <div class="character-images-div">
+              <img class="character-images" src="images/scarletwitch.webp">
+            </div>
+            <div>
+              <img class="character-images" src="images/steve.jpg">
+            </div>
+          </div>
+
+          <div class="lock-in-div">
+            <button>LOCK IN</button>
+          </div>
+        </div>
+
       </div>
 
     <script>
       const players = [
         {
-          player: "Bunny",
+          player: "player1",
+          character: "",
           turn: null
         },
         {
-          player: "Turtle",
+          player: "player2",
+          character: "",
           turn: null
         }];
 
@@ -181,49 +256,47 @@
           /* The visible bunny-turtle-toe board on the web page is also
           represented in the bunnyTurtleBoard array. 
 
-          If Bunny clicks #square0 div, then event.target.id == "square0";
-          so bunnyTurtleBoard[0] will be equal to "Bunny"
+          If player1 clicks #square0 div, then event.target.id == "square0";
+          so bunnyTurtleBoard[0] will be equal to "player1"
           */
           if (event.target.id == "square0") {
-            bunnyTurtleBoard[0] = "Bunny";
+            bunnyTurtleBoard[0] = players[0].player;
           } 
           else if (event.target.id == "square1") {
-            bunnyTurtleBoard[1] = "Bunny";
+            bunnyTurtleBoard[1] = players[0].player;
           }
           else if (event.target.id == "square2") {
-            bunnyTurtleBoard[2] = "Bunny";
+            bunnyTurtleBoard[2] = players[0].player;
           }
           else if (event.target.id == "square3") {
-            bunnyTurtleBoard[3] = "Bunny";
+            bunnyTurtleBoard[3] = players[0].player;
           }
           else if (event.target.id == "square4") {
-            bunnyTurtleBoard[4] = "Bunny";
+            bunnyTurtleBoard[4] = players[0].player;
           }
           else if (event.target.id == "square5") {
-            bunnyTurtleBoard[5] = "Bunny";
+            bunnyTurtleBoard[5] = players[0].player;
           }
           else if (event.target.id == "square6") {
-            bunnyTurtleBoard[6] = "Bunny";
+            bunnyTurtleBoard[6] = players[0].player;
           }
           else if (event.target.id == "square7") {
-            bunnyTurtleBoard[7] = "Bunny";
+            bunnyTurtleBoard[7] = players[0].player;
           }
           else if (event.target.id == "square8") {
-            bunnyTurtleBoard[8] = "Bunny";
+            bunnyTurtleBoard[8] = players[0].player;
           }
 
           //CHECK IF BUNNY WON. 
           checkIfPlayerWon(players[0].player);
 
-          //Once Bunny takes its turn, turn will go over to Turtle. 
+          //Once player1 takes its turn, turn will go over to player2. 
           players[0].turn = false;
           players[1].turn = true;
 
-          //#player-turn paragraph will now display "Turn: Turtle"
-          document.getElementById("player-turn").innerHTML = "Turtle";
+          //#player-turn paragraph will now display "Turn: player2"
+          document.getElementById("player-turn").innerHTML = "player2";
         }
-
-
 
         else if (players[1].turn == true) { //if Turtle's turn...
           //player Turtle takes its turn.
@@ -235,46 +308,46 @@
           /* The visible bunny-turtle board on the web page is also 
           represented in the bunnyTurtleBoard array.
 
-          If the Turtle clicks #square0 div, then event.target.id == "square0";
-          so bunnyTurtleBoard[0] will be equal to "Turtle"
+          If the player2 clicks #square0 div, then event.target.id == "square0";
+          so bunnyTurtleBoard[0] will be equal to "player2"
           */
           if (event.target.id == "square0") {
-            bunnyTurtleBoard[0] = "Turtle";
+            bunnyTurtleBoard[0] = players[1].player;
           } 
           else if (event.target.id == "square1") {
-            bunnyTurtleBoard[1] = "Turtle";
+            bunnyTurtleBoard[1] = players[1].player;
           }
           else if (event.target.id == "square2") {
-            bunnyTurtleBoard[2] = "Turtle";
+            bunnyTurtleBoard[2] = players[1].player;
           }
           else if (event.target.id == "square3") {
-            bunnyTurtleBoard[3] = "Turtle";
+            bunnyTurtleBoard[3] = players[1].player;
           }
           else if (event.target.id == "square4") {
-            bunnyTurtleBoard[4] = "Turtle";
+            bunnyTurtleBoard[4] = players[1].player;
           }
           else if (event.target.id == "square5") {
-            bunnyTurtleBoard[5] = "Turtle";
+            bunnyTurtleBoard[5] = players[1].player;
           }
           else if (event.target.id == "square6") {
-            bunnyTurtleBoard[6] = "Turtle";
+            bunnyTurtleBoard[6] = players[1].player;
           }
           else if (event.target.id == "square7") {
-            bunnyTurtleBoard[7] = "Turtle";
+            bunnyTurtleBoard[7] = players[1].player;
           }
           else if (event.target.id == "square8") {
-            bunnyTurtleBoard[8] = "Turtle";
+            bunnyTurtleBoard[8] = players[1].player;
           }
 
           //CHECK IF TURTLE WON. 
           checkIfPlayerWon(players[1].player);
 
-          //Once Turtle takes its turn, turn will go over to Bunny.
+          //Once player2 takes its turn, turn will go over to player1.
           players[1].turn = false;
           players[0].turn = true;
 
-          //#player-turn paragraph will display Turn: Bunny
-          document.getElementById("player-turn").innerHTML = "Bunny";
+          //#player-turn paragraph will display Turn: player1
+          document.getElementById("player-turn").innerHTML = "player1";
         }
       });
 
@@ -291,17 +364,17 @@
         document.getElementById("player-turn").innerHTML = startingPlayer;
         
         /*
-        If startingPlayer equals "Bunny", then players[0].turn will equal true,
+        If startingPlayer equals "player1", then players[0].turn will equal true,
         while players[1].turn will equal false. 
 
-        If startingPlayer equals "Turtle", then players[1].turn will equal true,
+        If startingPlayer equals "player2", then players[1].turn will equal true,
         while players[0].turn will equal false. 
         */
-        if (startingPlayer == "Bunny") {
+        if (startingPlayer == "player1") {
           players[0].turn = true;
           players[1].turn = false;
         } 
-        else if (startingPlayer == "Turtle") {
+        else if (startingPlayer == "player2") {
           players[1].turn = true;
           players[0].turn = false;
         }
@@ -309,7 +382,7 @@
 
       function checkIfPlayerWon(boardPlayer) { 
         /*
-        1) Goal: This function receives the boardPlayer, which is "Bunny" or "Turtle", and then checks if the boardPlayer won.
+        1) Goal: This function receives the boardPlayer, which is "player1" or "player2", and then checks if the boardPlayer won.
         */
         if (bunnyTurtleBoard[0] == boardPlayer && bunnyTurtleBoard[1] == boardPlayer && bunnyTurtleBoard[2] == boardPlayer) {
             winner = boardPlayer;
@@ -355,19 +428,40 @@
 
       
       function characterSelection(characterSelectionTimeBooleanValue) {
+        //players' name displayed in character selection page
+        document.getElementById("player-1-name").innerHTML = players[0].player;
+        document.getElementById("player-2-name").innerHTML = players[1].player;
+
+        /*
+        if it is characterSelection time, then the tic-tac-toe board will be invisible while the
+        character-selection will be visible 
+        */
         if (characterSelectionTimeBooleanValue == true) {
           document.getElementById("middle-div").style.cssText = "opacity: 0;";
           document.getElementById("bottom-div").style.cssText = "opacity: 0;";
 
-          document.getElementById("character-selection-div").style.cssText = "opacity: 1;";
+          document.getElementById("player-1-character-selection-div").style.cssText = "opacity: 1; top: 25%;";
+          document.getElementById("player-2-character-selection-div").style.cssText = "opacity: 1; top: 75%;";
         }
+
+        /*
+        if it is not characterSelection time, then the tic-tac-toe board will become visible while the character selection
+        will become invisible 
+        */
         else if (characterSelectionTimeBooleanValue == false) {
           document.getElementById("middle-div").style.cssText = "opacity: 1;";
           document.getElementById("bottom-div").style.cssText = "opacity: 1;";
 
-          document.getElementById("character-selection-div").style.cssText = "opacity: 0;";
+          document.getElementById("player-1-character-selection-div").style.cssText = "opacity: 0;";
+          document.getElementById("player-2-character-selection-div").style.cssText = "opacity: 0;";
         }
       }
+
+      document.getElementById("player-1-character-selection-div").addEventListener("click", function(event) {
+        /*
+        1) Goal: This function will receive event.target.id, aka the character images' id, 
+        */
+      })
     </script>
   </body>
 </html>
