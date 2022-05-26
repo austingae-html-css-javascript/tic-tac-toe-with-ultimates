@@ -106,14 +106,24 @@
 
           <div id="player-turn-div">
             <p>Turn: </p>
-            <p id="playerTurn"></p>
+            <p id="player-turn"></p>
           </div>
         </div>
       </div>
     </div>
 
     <script>
-      const players = ["Bunny","Turtle"];
+      const players = [
+        {
+          player: "Bunny",
+          turn: null
+        },
+        {
+          player: "Turtle",
+          turn: null
+        }];
+
+      startingPlayer();
 
       document.getElementById("middle-div").addEventListener("click", function(event) {
         let img = document.createElement("img");
@@ -122,14 +132,27 @@
         document.getElementById(event.target.id).appendChild(img);
       });
 
-      function startingPlayer() {
+      function startingPlayer() { 
+        /*
+        1) Goal: This function will determine which player begans first in Bunny-Turtle-Toe.
+        */
+        let randomIndex = Math.floor(Math.random() * players.length);
+        let startingPlayer = players[randomIndex].player;
+        document.getElementById("player-turn").innerHTML = startingPlayer;
         
-        var startingPlayer = players[Math.floor(Math.random()*players.length)];
-        document.getElementById("playerTurn").innerHTML = startingPlayer;
+        if (startingPlayer == "Bunny") {
+          players[0].turn = true;
+          players[1].turn = false;
+        }
+        else if (startingPlayer == "Turtle") {
+          players[1].turn = true;
+          players[0].turn = false;
+        }
       }
 
+      
 
-      startingPlayer();
+
     </script>
   </body>
 </html>
