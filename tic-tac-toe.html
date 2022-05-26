@@ -1,0 +1,136 @@
+<!--
+  Goal: Use my current knowledge of HTML, CSS, and Javascript to create the Tic-Tae-Toe game 
+  without any video tutorial except for the help of online resources, including stackoverflow, 
+  geeksforgeeks, and w3school. 
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bunny-Turtle-Toe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+    <style>
+      body {
+        font-family: 'Carter One', cursive;
+      }
+
+      p {
+        display: inline-block;
+        margin: 0px;
+      }
+
+      #body-div {
+        display:inline-flex;
+      }
+
+      #bunny-turtle-toe-DIV {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #bunny-in-the-title, #bunny-scoreboard {
+        color: rgb(243,170,184);
+      }
+
+      #turtle-in-the-title, #turtle-scoreboard {
+        color: rgb(19,137,102);
+      }
+
+      #toe-in-the-title {
+        color: rgb(201,142,130);
+      }
+
+      #middle-div {
+        display:grid;
+        grid-template-rows: 170px 170px 170px;
+        grid-template-columns: 170px 170px 170px;
+
+        border-style: solid;
+        border-color: black;
+      }
+
+      .bunny-turtle-toe-squares {
+        border-style: solid;
+        border-color: black;
+      }
+
+      #bottom-div {
+        display:flex;
+        flex-direction: row;
+
+        margin-top: 20px;
+      }
+
+      #turtle-scoreboard-div {
+        margin-left: 50px;
+        margin-right: 50px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div id="body-div">
+      <div id="bunny-turtle-toe-DIV">
+        <div id="top-div"> <!--title: Bunny-Turtle-Toe-->
+          <h1><span id="bunny-in-the-title">Bunny</span>-<span id="turtle-in-the-title">Turtle</span>-<span id="toe-in-the-title">Toe</span></h1>
+        </div>
+  
+        <div id="middle-div"> 
+          <div id="square1" class="bunny-turtle-toe-squares"></div>
+          <div id="square2" class="bunny-turtle-toe-squares"></div>
+          <div id="square3" class="bunny-turtle-toe-squares"></div>
+          <div id="square4" class="bunny-turtle-toe-squares"></div>
+          <div id="square5" class="bunny-turtle-toe-squares"></div>
+          <div id="square6" class="bunny-turtle-toe-squares"></div>
+          <div id="square7" class="bunny-turtle-toe-squares"></div>
+          <div id="square8" class="bunny-turtle-toe-squares"></div>
+          <div id="square9" class="bunny-turtle-toe-squares"></div>
+        </div>
+  
+        <div id="bottom-div">
+          <div id="bunny-scoreboard-div"> <!--bunny wins: #-->
+            <p id="bunny-scoreboard">Bunny Wins: </p>
+            <p> 0</p>
+          </div>
+  
+          <div id="turtle-scoreboard-div"> <!--turtle wins: #-->
+            <p id="turtle-scoreboard">Turtle Wins:</p>
+            <p> 0</p>
+          </div>
+
+          <div id="player-turn-div">
+            <p>Turn: </p>
+            <p id="playerTurn"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const players = ["Bunny","Turtle"];
+
+      document.getElementById("middle-div").addEventListener("click", function(event) {
+        let img = document.createElement("img");
+        img.src = "images/bunny.png";
+        img.style.cssText = "width: 100%;"
+        document.getElementById(event.target.id).appendChild(img);
+      });
+
+      function startingPlayer() {
+        
+        var startingPlayer = players[Math.floor(Math.random()*players.length)];
+        document.getElementById("playerTurn").innerHTML = startingPlayer;
+      }
+
+
+      startingPlayer();
+    </script>
+  </body>
+</html>
+<!---->
