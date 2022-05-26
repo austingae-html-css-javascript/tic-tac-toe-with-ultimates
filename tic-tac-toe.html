@@ -129,6 +129,8 @@
         "","",""  //[6] == square6,[7] == square7,[8] == square8
       ];
 
+      let winner = "";
+
       startingPlayer();
 
       document.getElementById("middle-div").addEventListener("click", function(event) {
@@ -140,7 +142,7 @@
           document.getElementById(event.target.id).appendChild(img);
 
           /* The visible bunny-turtle-toe board on the web page is also
-          in the bunnyTurtleBoard array. 
+          represented in the bunnyTurtleBoard array. 
 
           If Bunny clicks #square0 div, then event.target.id == "square0";
           so bunnyTurtleBoard[0] will be equal to "Bunny"
@@ -173,12 +175,50 @@
             bunnyTurtleBoard[8] = "Bunny";
           }
 
+          //CHECK IF BUNNY WON. 
+          if (bunnyTurtleBoard[0] == "Bunny" && bunnyTurtleBoard[1] == "Bunny" && bunnyTurtleBoard[2] == "Bunny") {
+            winner = "Bunny";
+            console.log(winner + " wins!");
+          }
+          else if (bunnyTurtleBoard[3] == "Bunny" && bunnyTurtleBoard[4] == "Bunny" && bunnyTurtleBoard[5] == "Bunny") {
+            winner = "Bunny";
+            console.log(winner + " wins!");
+          }
+          else if (bunnyTurtleBoard[6] == "Bunny" && bunnyTurtleBoard[7] == "Bunny" && bunnyTurtleBoard[8] == "Bunny") {
+            winner = "Bunny";
+            console.log(winner + " wins!");
+          }
+          else if (bunnyTurtleBoard[0] == "Bunny" && bunnyTurtleBoard[3] == "Bunny" && bunnyTurtleBoard[6] == "Bunny") {
+            winner = "Bunny";
+            console.log(winner + " wins!");
+          }
+          else if (bunnyTurtleBoard[1] == "Bunny" && bunnyTurtleBoard[4] == "Bunny" && bunnyTurtleBoard[7] == "Bunny") {
+            winner = "Bunny";
+            console.log(winner + " wins!");
+          }
+          else if (bunnyTurtleBoard[2] == "Bunny" && bunnyTurtleBoard[5] == "Bunny" && bunnyTurtleBoard[8] == "Bunny") {
+            winner = "Bunny";
+            console.log(winner + " wins!");
+          }
+          else if (bunnyTurtleBoard[0] == "Bunny" && bunnyTurtleBoard[4] == "Bunny" && bunnyTurtleBoard[8] == "Bunny") {
+            winner = "Bunny";
+            console.log(winner + " wins!");
+          }
+          else if (bunnyTurtleBoard[2] == "Bunny" && bunnyTurtleBoard[4] == "Bunny" && bunnyTurtleBoard[6] == "Bunny") {
+            winner = "Bunny";
+            console.log(winner + " wins!");
+          }
+
           //Once Bunny takes its turn, turn will go over to Turtle. 
           players[0].turn = false;
           players[1].turn = true;
-          
 
+          //#player-turn paragraph will now display "Turn: Turtle"
+          document.getElementById("player-turn").innerHTML = "Turtle";
         }
+
+
+
         else if (players[1].turn == true) { //if Turtle's turn...
           //player Turtle takes its turn.
           let img = document.createElement("img");
@@ -186,9 +226,8 @@
           img.style.cssText = "width: 100%";
           document.getElementById(event.target.id).appendChild(img);
 
-
           /* The visible bunny-turtle board on the web page is also 
-          in the bunnyTurtleBoard array.
+          represented in the bunnyTurtleBoard array.
 
           If the Turtle clicks #square0 div, then event.target.id == "square0";
           so bunnyTurtleBoard[0] will be equal to "Turtle"
@@ -221,9 +260,14 @@
             bunnyTurtleBoard[8] = "Turtle";
           }
 
+          //CHECK IF TURTLE WON. 
+
           //Once Turtle takes its turn, turn will go over to Bunny.
           players[1].turn = false;
           players[0].turn = true;
+
+          //#player-turn paragraph will display Turn: Bunny
+          document.getElementById("player-turn").innerHTML = "Bunny";
         }
       });
 
