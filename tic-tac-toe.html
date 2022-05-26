@@ -176,38 +176,7 @@
           }
 
           //CHECK IF BUNNY WON. 
-          if (bunnyTurtleBoard[0] == "Bunny" && bunnyTurtleBoard[1] == "Bunny" && bunnyTurtleBoard[2] == "Bunny") {
-            winner = "Bunny";
-            console.log(winner + " wins!");
-          }
-          else if (bunnyTurtleBoard[3] == "Bunny" && bunnyTurtleBoard[4] == "Bunny" && bunnyTurtleBoard[5] == "Bunny") {
-            winner = "Bunny";
-            console.log(winner + " wins!");
-          }
-          else if (bunnyTurtleBoard[6] == "Bunny" && bunnyTurtleBoard[7] == "Bunny" && bunnyTurtleBoard[8] == "Bunny") {
-            winner = "Bunny";
-            console.log(winner + " wins!");
-          }
-          else if (bunnyTurtleBoard[0] == "Bunny" && bunnyTurtleBoard[3] == "Bunny" && bunnyTurtleBoard[6] == "Bunny") {
-            winner = "Bunny";
-            console.log(winner + " wins!");
-          }
-          else if (bunnyTurtleBoard[1] == "Bunny" && bunnyTurtleBoard[4] == "Bunny" && bunnyTurtleBoard[7] == "Bunny") {
-            winner = "Bunny";
-            console.log(winner + " wins!");
-          }
-          else if (bunnyTurtleBoard[2] == "Bunny" && bunnyTurtleBoard[5] == "Bunny" && bunnyTurtleBoard[8] == "Bunny") {
-            winner = "Bunny";
-            console.log(winner + " wins!");
-          }
-          else if (bunnyTurtleBoard[0] == "Bunny" && bunnyTurtleBoard[4] == "Bunny" && bunnyTurtleBoard[8] == "Bunny") {
-            winner = "Bunny";
-            console.log(winner + " wins!");
-          }
-          else if (bunnyTurtleBoard[2] == "Bunny" && bunnyTurtleBoard[4] == "Bunny" && bunnyTurtleBoard[6] == "Bunny") {
-            winner = "Bunny";
-            console.log(winner + " wins!");
-          }
+          checkIfPlayerWon(players[0].player);
 
           //Once Bunny takes its turn, turn will go over to Turtle. 
           players[0].turn = false;
@@ -261,6 +230,7 @@
           }
 
           //CHECK IF TURTLE WON. 
+          checkIfPlayerWon(players[1].player);
 
           //Once Turtle takes its turn, turn will go over to Bunny.
           players[1].turn = false;
@@ -299,6 +269,37 @@
           players[0].turn = false;
         }
       }
+
+      function checkIfPlayerWon(boardPlayer) { 
+        /*
+        1) Goal: This function receives the boardPlayer, which is "Bunny" or "Turtle", and then checks if the boardPlayer won.
+        */
+        if (bunnyTurtleBoard[0] == boardPlayer && bunnyTurtleBoard[1] == boardPlayer && bunnyTurtleBoard[2] == boardPlayer) {
+            winner = boardPlayer;
+          }
+          else if (bunnyTurtleBoard[3] == boardPlayer && bunnyTurtleBoard[4] == boardPlayer && bunnyTurtleBoard[5] == boardPlayer) {
+            winner = boardPlayer;
+          }
+          else if (bunnyTurtleBoard[6] == boardPlayer && bunnyTurtleBoard[7] == boardPlayer && bunnyTurtleBoard[8] == boardPlayer) {
+            winner = boardPlayer;
+          }
+          else if (bunnyTurtleBoard[0] == boardPlayer && bunnyTurtleBoard[3] == boardPlayer && bunnyTurtleBoard[6] == boardPlayer) {
+            winner = boardPlayer;
+          }
+          else if (bunnyTurtleBoard[1] == boardPlayer && bunnyTurtleBoard[4] == boardPlayer && bunnyTurtleBoard[7] == boardPlayer) {
+            winner = boardPlayer;
+          }
+          else if (bunnyTurtleBoard[2] == boardPlayer && bunnyTurtleBoard[5] == boardPlayer && bunnyTurtleBoard[8] == boardPlayer) {
+            winner = boardPlayer;
+          }
+          else if (bunnyTurtleBoard[0] == boardPlayer && bunnyTurtleBoard[4] == boardPlayer && bunnyTurtleBoard[8] == boardPlayer) {
+            winner = boardPlayer;
+          }
+          else if (bunnyTurtleBoard[2] == boardPlayer && bunnyTurtleBoard[4] == boardPlayer && bunnyTurtleBoard[6] == boardPlayer) {
+            winner = boardPlayer;
+          }
+      }
+
     </script>
   </body>
 </html>
