@@ -82,6 +82,7 @@
         </div>
   
         <div id="middle-div"> 
+          <div id="square0" class="bunny-turtle-toe-squares"></div>
           <div id="square1" class="bunny-turtle-toe-squares"></div>
           <div id="square2" class="bunny-turtle-toe-squares"></div>
           <div id="square3" class="bunny-turtle-toe-squares"></div>
@@ -90,7 +91,6 @@
           <div id="square6" class="bunny-turtle-toe-squares"></div>
           <div id="square7" class="bunny-turtle-toe-squares"></div>
           <div id="square8" class="bunny-turtle-toe-squares"></div>
-          <div id="square9" class="bunny-turtle-toe-squares"></div>
         </div>
   
         <div id="bottom-div">
@@ -123,20 +123,107 @@
           turn: null
         }];
 
+      let bunnyTurtleBoard = [
+        "","","", //[0] == square0,[1] == square1,[2] == square2,
+        "","","", //[3] == square3,[4] == square4,[5] == square5,
+        "","",""  //[6] == square6,[7] == square7,[8] == square8
+      ];
+
       startingPlayer();
 
       document.getElementById("middle-div").addEventListener("click", function(event) {
         if (players[0].turn == true) { //if Bunny's turn...
+          //player Bunny takes its turn.
           let img = document.createElement("img");
           img.src = "images/bunny.png";
           img.style.cssText = "width: 100%";
           document.getElementById(event.target.id).appendChild(img);
+
+          /* The visible bunny-turtle-toe board on the web page is also
+          in the bunnyTurtleBoard array. 
+
+          If Bunny clicks #square0 div, then event.target.id == "square0";
+          so bunnyTurtleBoard[0] will be equal to "Bunny"
+          */
+          if (event.target.id == "square0") {
+            bunnyTurtleBoard[0] = "Bunny";
+          } 
+          else if (event.target.id == "square1") {
+            bunnyTurtleBoard[1] = "Bunny";
+          }
+          else if (event.target.id == "square2") {
+            bunnyTurtleBoard[2] = "Bunny";
+          }
+          else if (event.target.id == "square3") {
+            bunnyTurtleBoard[3] = "Bunny";
+          }
+          else if (event.target.id == "square4") {
+            bunnyTurtleBoard[4] = "Bunny";
+          }
+          else if (event.target.id == "square5") {
+            bunnyTurtleBoard[5] = "Bunny";
+          }
+          else if (event.target.id == "square6") {
+            bunnyTurtleBoard[6] = "Bunny";
+          }
+          else if (event.target.id == "square7") {
+            bunnyTurtleBoard[7] = "Bunny";
+          }
+          else if (event.target.id == "square8") {
+            bunnyTurtleBoard[8] = "Bunny";
+          }
+
+          //Once Bunny takes its turn, turn will go over to Turtle. 
+          players[0].turn = false;
+          players[1].turn = true;
+          
+
         }
         else if (players[1].turn == true) { //if Turtle's turn...
+          //player Turtle takes its turn.
           let img = document.createElement("img");
           img.src = "images/turtle.png";
           img.style.cssText = "width: 100%";
           document.getElementById(event.target.id).appendChild(img);
+
+
+          /* The visible bunny-turtle board on the web page is also 
+          in the bunnyTurtleBoard array.
+
+          If the Turtle clicks #square0 div, then event.target.id == "square0";
+          so bunnyTurtleBoard[0] will be equal to "Turtle"
+          */
+          if (event.target.id == "square0") {
+            bunnyTurtleBoard[0] = "Turtle";
+          } 
+          else if (event.target.id == "square1") {
+            bunnyTurtleBoard[1] = "Turtle";
+          }
+          else if (event.target.id == "square2") {
+            bunnyTurtleBoard[2] = "Turtle";
+          }
+          else if (event.target.id == "square3") {
+            bunnyTurtleBoard[3] = "Turtle";
+          }
+          else if (event.target.id == "square4") {
+            bunnyTurtleBoard[4] = "Turtle";
+          }
+          else if (event.target.id == "square5") {
+            bunnyTurtleBoard[5] = "Turtle";
+          }
+          else if (event.target.id == "square6") {
+            bunnyTurtleBoard[6] = "Turtle";
+          }
+          else if (event.target.id == "square7") {
+            bunnyTurtleBoard[7] = "Turtle";
+          }
+          else if (event.target.id == "square8") {
+            bunnyTurtleBoard[8] = "Turtle";
+          }
+
+          //Once Turtle takes its turn, turn will go over to Bunny.
+          players[1].turn = false;
+          players[0].turn = true;
         }
       });
 
@@ -148,7 +235,6 @@
         //startingPlayer will equal either "Bunny" or "Turtle"
         let randomIndex = Math.floor(Math.random() * players.length);
         let startingPlayer = players[randomIndex].player;
-
 
         //#player-turn paragraph will display startingPlayer
         document.getElementById("player-turn").innerHTML = startingPlayer;
