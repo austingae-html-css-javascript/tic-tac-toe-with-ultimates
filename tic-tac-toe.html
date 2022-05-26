@@ -126,34 +126,49 @@
       startingPlayer();
 
       document.getElementById("middle-div").addEventListener("click", function(event) {
-        let img = document.createElement("img");
-        img.src = "images/bunny.png";
-        img.style.cssText = "width: 100%;"
-        document.getElementById(event.target.id).appendChild(img);
+        if (players[0].turn == true) { //if Bunny's turn...
+          let img = document.createElement("img");
+          img.src = "images/bunny.png";
+          img.style.cssText = "width: 100%";
+          document.getElementById(event.target.id).appendChild(img);
+        }
+        else if (players[1].turn == true) { //if Turtle's turn...
+          let img = document.createElement("img");
+          img.src = "images/turtle.png";
+          img.style.cssText = "width: 100%";
+          document.getElementById(event.target.id).appendChild(img);
+        }
       });
 
       function startingPlayer() { 
         /*
-        1) Goal: This function will determine which player begans first in Bunny-Turtle-Toe.
+        1) Goal: This function will randomly determine which player begans first in Bunny-Turtle-Toe.
         */
+
+        //startingPlayer will equal either "Bunny" or "Turtle"
         let randomIndex = Math.floor(Math.random() * players.length);
         let startingPlayer = players[randomIndex].player;
+
+
+        //#player-turn paragraph will display startingPlayer
         document.getElementById("player-turn").innerHTML = startingPlayer;
         
+        /*
+        If startingPlayer equals "Bunny", then players[0].turn will equal true,
+        while players[1].turn will equal false. 
+
+        If startingPlayer equals "Turtle", then players[1].turn will equal true,
+        while players[0].turn will equal false. 
+        */
         if (startingPlayer == "Bunny") {
           players[0].turn = true;
           players[1].turn = false;
-        }
+        } 
         else if (startingPlayer == "Turtle") {
           players[1].turn = true;
           players[0].turn = false;
         }
       }
-
-      
-
-
     </script>
   </body>
 </html>
-<!---->
