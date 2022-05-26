@@ -31,6 +31,8 @@
         display:flex;
         flex-direction: column;
         align-items: center;
+
+        position: relative;
       }
 
       #bunny-in-the-title, #bunny-scoreboard {
@@ -298,6 +300,28 @@
           else if (bunnyTurtleBoard[2] == boardPlayer && bunnyTurtleBoard[4] == boardPlayer && bunnyTurtleBoard[6] == boardPlayer) {
             winner = boardPlayer;
           }
+
+          //If a winner exists, the lines of code inside the if statement will display the winner on the screen. 
+          if (winner == boardPlayer) {
+            let winnerDisplayScreen = document.createElement("div");
+            winnerDisplayScreen.style.cssText = "position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; background-color: rgba(0,0,0,0.1);";
+            document.getElementById("bunny-turtle-toe-DIV").appendChild(winnerDisplayScreen);
+
+            let winnerDisplayBox = document.createElement("div");
+            winnerDisplayBox.style.cssText = "position: absolute; top: 50%; left: 38%; background-color: black; padding: 10px 12px 10px 12px; border-radius: 10px;";
+            winnerDisplayScreen.appendChild(winnerDisplayBox);
+
+            let winnerText = document.createElement("p");
+            winnerText.innerHTML = "Victory: " + winner;
+            winnerText.style.cssText = "color: white;"
+            winnerDisplayBox.appendChild(winnerText);
+
+
+         
+          }
+
+
+
       }
 
     </script>
