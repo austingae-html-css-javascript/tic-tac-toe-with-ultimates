@@ -64,7 +64,7 @@
         margin-top: 20px;
       }
 
-      #turtle-scoreboard-div {
+      #player2-ultimate-div{
         margin-left: 50px;
         margin-right: 50px;
       }
@@ -136,14 +136,12 @@
         </div>
   
         <div id="bottom-div">
-          <div id="bunny-scoreboard-div"> <!--bunny wins: #-->
-            <p id="bunny-scoreboard">Bunny Wins: </p>
-            <p> 0</p>
+          <div id="player1-ultimate-div"> <!--player1's ultimate-->
+            <button id="player-1-ultimate-button"> Player1 Ultimate</button>
           </div>
   
-          <div id="turtle-scoreboard-div"> <!--turtle wins: #-->
-            <p id="turtle-scoreboard">Turtle Wins:</p>
-            <p> 0</p>
+          <div id="player2-ultimate-div"> <!--player2's ultimate-->
+            <button id="player-2-ultimate-button">Player2 Ultimate</button>
           </div>
 
           <div id="player-turn-div">
@@ -250,12 +248,16 @@
 
       let winner = "";
 
-      characterSelectionTime = true;
+      let characterSelectionTime = true;
       characterSelection(characterSelectionTime);
 
       startingPlayer();
 
+      let player1BunnyUltimate = false;
+
       document.getElementById("middle-div").addEventListener("click", function(event) {
+
+        //PLAYER 1
         if (players[0].turn == true) { //if player1's turn...
           //player1 takes its turn.
           let img = document.createElement("img");
@@ -301,13 +303,24 @@
           //CHECK IF BUNNY WON. 
           checkIfPlayerWon(players[0].player);
 
-          //Once player1 takes its turn, turn will go over to player2. 
-          players[0].turn = false;
-          players[1].turn = true;
+          //CHECK IF PLAYER1 BUNNY ULTIMATE IS ON. IF IT IS NOT, THEN PLAYER2's TURN. IF IT IS ON, THEN PLAYER1's TURN ONE MORE TIME.
+          if (player1BunnyUltimate == false) {
+            //Once player1 takes its turn, turn will go over to player2. 
+            players[0].turn = false;
+            players[1].turn = true;
+            
+            //#player-turn paragraph will now display "Turn: player2"
+            document.getElementById("player-turn").innerHTML = "player2";
+          }
+          else if (player1BunnyUltimate == true) {
+            players[0].turn = true;
+            players[1].turn = false;
 
-          //#player-turn paragraph will now display "Turn: player2"
-          document.getElementById("player-turn").innerHTML = "player2";
+            player1BunnyUltimate = false;
+          }
         }
+
+        //PLAYER 2
 
         else if (players[1].turn == true) { //if player2's turn...
           //player2 takes its turn.
@@ -543,7 +556,6 @@
 
       //character description code (^^^) ends here. 
 
-
       /*
       1) Goal: If a player clicks a character image, then the character image will have a box shadow.
       If a player then clicks another character image, then the first character image will be unselected and the second character
@@ -621,16 +633,30 @@
         }
       });
 
+      /*
+      1) Goal: If #player-1-ultimate-button button is clicked, then function(event) will run.
+      Depending on which character player1 is, his ultimate will do different thing. 
+      */
+     document.getElementById("player-1-ultimate-button").addEventListener("click", function(event) {
+       if (players[0].character == "player-1-bunny") {
+         player1BunnyUltimate = true;
+       }
+       else if (players[0].character == "player-1-turtle") {
+         
+       }
+       else if (players[0].character == "player-1-genghiskhan") {
 
+       }
+       else if (player[0].character == "player-1-doctorstrange") {
 
+       }
+       else if (player[0].character == "player-1-scarletwitch") {
 
+       }
+       else if (player[0].character == "player-1-steve") {
 
-
-
-
-
-
+       }
+     })
     </script>
   </body>
 </html>
-
