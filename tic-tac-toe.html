@@ -328,6 +328,9 @@
           }
         }
 
+
+
+
         //PLAYER 2
 
         else if (players[1].turn == true) { //if player2's turn...
@@ -382,13 +385,23 @@
           //CHECK IF player2 WON. 
           checkIfPlayerWon(players[1].player);
 
-          //Once player2 takes its turn, turn will go over to player1.
-          players[1].turn = false;
-          players[0].turn = true;
 
-          //#player-turn paragraph will display Turn: player1
-          document.getElementById("player-turn").innerHTML = "player1";
-        }
+          //CHECK IF PLAYER2 BUNNY ULTIMATE IS ON. IF IT IS NOT, THEN PLAYER1's TURN. IF IT IS ON, THEN PLAYER1's TURN ONE MORE TIME.
+          if (player2BunnyUltimate == false) {
+            //Once player1 takes its turn, turn will go over to player2. 
+            players[1].turn = false;
+            players[0].turn = true;
+            
+            //#player-turn paragraph will now display "Turn: player1"
+            document.getElementById("player-turn").innerHTML = "player1";
+          }
+          else if (player2BunnyUltimate == true) {
+            players[1].turn = true;
+            players[0].turn = false;
+
+            player2BunnyUltimate = false;
+          }
+        }          
       });
 
       function startingPlayer() { 
@@ -502,9 +515,7 @@
 
         Characters' Ultimates: 
         Turtle:
-        - The turtle will place its shell on a square. The opponent will have two choices: 1) if the opponent uses
-        its turn to break the shell, then nothing will happen. 2) if the opponent doesn't use its turn to break
-        the shell, then after his turn, the shell will slide in one direction and empty all the squares.
+        - The Turtle will place its shell on one of four corner squares. The shell will then randomly slide in one direction and empty that direction's squares.
         Bunny: 
         - With its agility, the bunny can place two squares in one turn. 
         Genghis Khan:
@@ -525,7 +536,7 @@
       });
 
       document.getElementById("player-1-turtle").addEventListener("click", function(event) {
-        document.getElementById("player-1-character-description").innerHTML = "Ultimate: The Turtle will place its shell on a square. If the opponent does not break the shell with his next turn, then the shell will randomly slide in one direction and empty that direction's squares."
+        document.getElementById("player-1-character-description").innerHTML = "Ultimate: The Turtle will place its shell on one of four corner squares. The shell will then randomly slide in one direction and empty that direction's squares."
 
       });
 
@@ -550,7 +561,7 @@
       });
 
       document.getElementById("player-2-turtle").addEventListener("click", function(event) {
-        document.getElementById("player-2-character-description").innerHTML = "Ultimate: The Turtle will place its shell on a square. If the opponent does not break the shell with his next turn, then the shell will randomly slide in one direction and empty that direction's squares."
+        document.getElementById("player-2-character-description").innerHTML = "Ultimate: The Turtle will place its shell on one of four corner squares. The shell will then randomly slide in one direction and empty that direction's squares."
       });
 
       document.getElementById("player-2-genghiskhan").addEventListener("click", function(event) {
