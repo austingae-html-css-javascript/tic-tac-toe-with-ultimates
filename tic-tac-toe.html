@@ -254,17 +254,59 @@
       startingPlayer();
 
       let player1BunnyUltimate = false;
+      let player1TurtleUltimate = false;
 
       document.getElementById("middle-div").addEventListener("click", function(event) {
-
         //PLAYER 1
         if (players[0].turn == true) { //if player1's turn...
           //player1 takes its turn.
-          let img = document.createElement("img");
-          imgName = (players[0].character).replace("player-1-","");
-          img.src = "images/" + imgName + ".png";
-          img.style.cssText = "width: 100%";
-          document.getElementById(event.target.id).appendChild(img);
+
+          if (player1TurtleUltimate == true) {
+            let shellImg = document.createElement("img");
+            shellImg.src = "images/shell.png";
+            shellImg.style.cssText = "width: 100%;";
+            document.getElementById(event.target.id).appendChild(shellImg);
+            
+            if (event.target.id == "square0") {
+              const direction = ["right"];
+              let randomIndex = Math.floor(Math.random() * direction.length);
+              let shellDirection = direction[randomIndex];
+              
+              console.log(shellDirection);
+              if (shellDirection == direction[0]) {
+                document.getElementById("square1").replaceChildren();
+                document.getElementById("square2").replaceChildren();
+
+                setTimeout(function() {
+                  document.getElementById("square0").replaceChildren();
+                }, 1000);
+              }
+            } 
+            else if (event.target.id == "square2") {
+              const direction = ["left", "down", "diagonal"];
+              let randomIndex = Math.floor(Math.random() * direction.length);
+              let shellDirection = direction[randomIndex];
+            }
+            else if (event.target.id == "square6") {
+              const direction = ["right", "up", "diagonal"];
+              let randomIndex = Math.floor(Math.random() * direction.length);
+              let shellDirection = direction[randomIndex];
+            }
+            else if (event.target.id == "square8") {
+              const direction = ["left", "up", "diagonal"];
+              let randomIndex = Math.floor(Math.random() * direction.length);
+              let shellDirection = direction[randomIndex];
+            }
+            
+            
+
+          }
+          else {
+            let img = document.createElement("img");
+            imgName = (players[0].character).replace("player-1-","");
+            img.src = "images/" + imgName + ".png";
+            img.style.cssText = "width: 100%";
+            document.getElementById(event.target.id).appendChild(img);
 
           /* The visible bunny-turtle-toe board on the web page is also
           represented in the bunnyTurtleBoard array. 
@@ -299,8 +341,9 @@
           else if (event.target.id == "square8") {
             bunnyTurtleBoard[8] = players[0].player;
           }
+          }
 
-          //CHECK IF BUNNY WON. 
+          //CHECK IF player1 WON. 
           checkIfPlayerWon(players[0].player);
 
           //CHECK IF PLAYER1 BUNNY ULTIMATE IS ON. IF IT IS NOT, THEN PLAYER2's TURN. IF IT IS ON, THEN PLAYER1's TURN ONE MORE TIME.
@@ -328,6 +371,7 @@
           imgName = (players[1].character).replace("player-2-","");
           img.src = "images/" + imgName + ".png";
           img.style.cssText = "width: 100%";
+
           document.getElementById(event.target.id).appendChild(img);
 
           /* The visible bunny-turtle board on the web page is also 
@@ -615,7 +659,6 @@
             characterSelectionTime = false;
             characterSelection(characterSelectionTime);
           }
-          
         }
       });
 
@@ -642,7 +685,7 @@
          player1BunnyUltimate = true;
        }
        else if (players[0].character == "player-1-turtle") {
-         
+         player1TurtleUltimate = true;
        }
        else if (players[0].character == "player-1-genghiskhan") {
 
