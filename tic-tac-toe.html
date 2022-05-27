@@ -15,7 +15,7 @@
 
     <style>
       body {
-        font-family: 'Carter One', cursive;
+        font-family: 'Carter One';
       }
 
       p {
@@ -78,6 +78,16 @@
         display:flex;
         flex-direction: row;
         margin-bottom: 20px;
+      }
+
+      .character-description-div {
+        width: 440px;
+        height: 40px;
+      }
+
+      #player-1-character-description, 
+      #player-2-character-description {
+        font-size: 12px;
       }
 
       .player-name-div {
@@ -155,22 +165,22 @@
 
           <div id="player-1-character-selection-images-div">
             <div class="character-images-div">
-              <img class="character-images"src="images/bunny.png">
+              <img class="character-images" id="player-1-bunny" src="images/bunny.png">
             </div>
             <div class="character-images-div">
-              <img class="character-images"src="images/turtle.png">
+              <img class="character-images" id="player-1-turtle" src="images/turtle.png">
             </div>
             <div class="character-images-div">
-              <img class="character-images"src="images/genghiskhan.webp">
+              <img class="character-images" id="player-1-genghiskhan" src="images/genghiskhan.webp">
             </div>
             <div class="character-images-div">
-              <img class="character-images" src="images/doctorstrange.webp">
+              <img class="character-images" id="player-1-doctorstrange" src="images/doctorstrange.webp">
             </div>
             <div class="character-images-div">
-              <img class="character-images" src="images/scarletwitch.webp">
+              <img class="character-images" id="player-1-scarletwitch" src="images/scarletwitch.webp">
             </div>
             <div>
-              <img class="character-images" src="images/steve.jpg">
+              <img class="character-images" id="player-1-steve" src="images/steve.jpg">
             </div>
           </div>
 
@@ -187,28 +197,28 @@
             </div>
 
             <div class="character-description-div">
-              <p id="player-1-character-description"></p>
+              <p id="player-2-character-description"></p>
             </div>
           </div>
 
           <div id="player-2-character-selection-images-div">
             <div class="character-images-div">
-              <img class="character-images"src="images/bunny.png">
+              <img class="character-images" id="player-2-bunny" src="images/bunny.png">
             </div>
             <div class="character-images-div">
-              <img class="character-images"src="images/turtle.png">
+              <img class="character-images" id="player-2-turtle" src="images/turtle.png">
             </div>
             <div class="character-images-div">
-              <img class="character-images"src="images/genghiskhan.webp">
+              <img class="character-images" id="player-2-genghiskhan" src="images/genghiskhan.webp">
             </div>
             <div class="character-images-div">
-              <img class="character-images" src="images/doctorstrange.webp">
+              <img class="character-images" id="player-2-doctorstrange"  src="images/doctorstrange.webp">
             </div>
             <div class="character-images-div">
-              <img class="character-images" src="images/scarletwitch.webp">
+              <img class="character-images" id="player-2-scarletwitch"  src="images/scarletwitch.webp">
             </div>
             <div>
-              <img class="character-images" src="images/steve.jpg">
+              <img class="character-images" id="player-2-steve"  src="images/steve.jpg">
             </div>
           </div>
 
@@ -452,37 +462,92 @@
           document.getElementById("middle-div").style.cssText = "opacity: 1;";
           document.getElementById("bottom-div").style.cssText = "opacity: 1;";
 
-          document.getElementById("player-1-character-selection-div").style.cssText = "opacity: 0;";
-          document.getElementById("player-2-character-selection-div").style.cssText = "opacity: 0;";
+          document.getElementById("player-1-character-selection-div").style.cssText = "opacity: 1; top: -200px;";
+          document.getElementById("player-2-character-selection-div").style.cssText = "opacity: 1; top: -200px;";
         }
       }
 
+      /*
+      //The lines of code below does this: if the player hovers over the character's image,
+      then #player-1-character-description paragraph will display that character's ultimate.
+
+        Characters' Ultimates: 
+        Turtle:
+        - The turtle will place its shell on a square. The opponent will have two choices: 1) if the opponent uses
+        its turn to break the shell, then nothing will happen. 2) if the opponent doesn't use its turn to break
+        the shell, then after his turn, the shell will slide in one direction and empty all the squares.
+        Bunny: 
+        - With its agility, the bunny can place two squares in one turn. 
+        Genghis Khan:
+        - Genghis Khan -- the Khan of Khans -- has set out to capture all the lands under the Eternal Blue Sky, and also
+        one of his opponent's squares. 
+        Doctor Strange:
+        - With his time stone, Doctor Strange can reverse time, whcih means reversing the last two turns. If 
+        his opponent activated his ultimate within the last two turns, then the opponent will get its ultimate back.  
+        Scarlet Witch:
+        - Able to control minds, Scarlet Witch can make her opponent's next turn be out of his control and just
+        randomly placed on the tic-tac-toe board. 
+        Steve (Minecraft):
+        - Steve has no ultimate. 
+      */
+
+      document.getElementById("player-1-bunny").addEventListener("mouseover", function(event) {
+        document.getElementById("player-1-character-description").innerHTML = "Ultimate: With its agility, the bunny can place two squares in one turn."
+      });
+
+      document.getElementById("player-1-turtle").addEventListener("mouseover", function(event) {
+        document.getElementById("player-1-character-description").innerHTML = "Ultimate: The Turtle will place its shell on a square. If the opponent does not break the shell with his next turn, then the shell will randomly slide in one direction and empty that direction's squares."
+
+      });
+
+      document.getElementById("player-1-genghiskhan").addEventListener("mouseover", function(event) {
+        document.getElementById("player-1-character-description").innerHTML = "Ultimate: Genghis Khan -- the Khan of Khans -- has set out to capture all the lands under the Eternal Blue Sky, and also one of his opponent's squares."
+      });
+
+      document.getElementById("player-1-doctorstrange").addEventListener("mouseover", function(event) {
+        document.getElementById("player-1-character-description").innerHTML = "With his time stone, Doctor Strange can reverse time, which means reversing the last two turns. If his opponent activated his ultimate within the last two turns, then the opponent will get his ultimate back."
+      });
+
+      document.getElementById("player-1-scarletwitch").addEventListener("mouseover", function(event) {
+        document.getElementById("player-1-character-description").innerHTML = "Able to control minds, Scarlet Witch will make her opponent's next move be randomly placed on the tic-tac-toe board."
+      });
+
+      document.getElementById("player-1-steve").addEventListener("mouseover", function(event) {
+        document.getElementById("player-1-character-description").innerHTML = "Steve has no ultimate. Just like his default skin, he must play default."
+      });
+
+      document.getElementById("player-2-bunny").addEventListener("mouseover", function(event) {
+        document.getElementById("player-2-character-description").innerHTML = "Ultimate: With its agility, the bunny can place two squares in one turn."
+      });
+
+      document.getElementById("player-2-turtle").addEventListener("mouseover", function(event) {
+        document.getElementById("player-2-character-description").innerHTML = "Ultimate: The Turtle will place its shell on a square. If the opponent does not break the shell with his next turn, then the shell will randomly slide in one direction and empty that direction's squares."
+      });
+
+      document.getElementById("player-2-genghiskhan").addEventListener("mouseover", function(event) {
+        document.getElementById("player-2-character-description").innerHTML = "Ultimate: Genghis Khan -- the Khan of Khans -- has set out to capture all the lands under the Eternal Blue Sky, and also one of his opponent's squares."
+      });
+
+      document.getElementById("player-2-doctorstrange").addEventListener("mouseover", function(event) {
+        document.getElementById("player-2-character-description").innerHTML = "With his time stone, Doctor Strange can reverse time, which means reversing the last two turns. If his opponent activated his ultimate within the last two turns, then the opponent will get his ultimate back."
+      });
+
+      document.getElementById("player-2-scarletwitch").addEventListener("mouseover", function(event) {
+        document.getElementById("player-2-character-description").innerHTML = "Able to control minds, Scarlet Witch will make her opponent's next move be randomly placed on the tic-tac-toe board."
+      });
+
+      document.getElementById("player-2-steve").addEventListener("mouseover", function(event) {
+        document.getElementById("player-2-character-description").innerHTML = "Steve has no ultimate. Just like his default skin, he must play default."
+      });
+
+
+
       document.getElementById("player-1-character-selection-div").addEventListener("click", function(event) {
         /*
-        1) Goal: This function will receive event.target.id, aka the character images' id, 
+        1) Goal: This function will receive event.target.id, aka the character images' id, s
         */
       })
     </script>
   </body>
 </html>
 
-<!--
-  Characters' Ultimates: 
-  Turtle:
-  - The turtle will place its shell on a square. The opponent will have two choices: 1) if the opponent uses
-  its turn to break the shell, then nothing will happen. 2) if the opponent doesn't use its turn to break
-  the shell, then after his turn, the shell will slide in one direction and empty all the squares.
-  Bunny: 
-  - With its agility, the bunny can place two squares in one turn. 
-  Genghis Khan:
-  - Genghis Khan -- the Khan of Khans -- has set out to capture all the lands under the Eternal Blue Sky, and also
-  one of his opponent's squares. 
-  Doctor Strange:
-  - With his time stone, Doctor Strange can reverse time, whcih means reversing the last two turns. If 
-  his opponent activated his ultimate within the last two turns, then the opponent will get its ultimate back.  
-  Scarlet Witch:
-  - Able to control minds, Scarlet Witch can make her opponent's next turn be out of his control and just
-  randomly placed on the tic-tac-toe board. 
-  Steve (Minecraft):
-  - Steve has no ultimate. 
--->
