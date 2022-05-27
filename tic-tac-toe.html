@@ -254,7 +254,9 @@
       startingPlayer();
 
       let player1BunnyUltimate = false;
+      let player2BunnyUltimate = false;
       let player1TurtleUltimate = false;
+      let player2TurtleUltimate = false;
 
       document.getElementById("middle-div").addEventListener("click", function(event) {
         //PLAYER 1
@@ -262,153 +264,7 @@
           //player1 takes its turn.
 
           if (player1TurtleUltimate == true) {
-            let shellImg = document.createElement("img");
-            shellImg.src = "images/shell.png";
-            shellImg.style.cssText = "width: 100%;";
-            document.getElementById(event.target.id).appendChild(shellImg);
-          
-            if (event.target.id == "square0") {
-              const direction = ["right", "down", "diagonal"];
-              let randomIndex = Math.floor(Math.random() * direction.length);
-              let shellDirection = direction[randomIndex];
-              
-              //if shellDirection == "right", then the shell will empty the spaces in the right direction
-              if (shellDirection == direction[0]) {
-                document.getElementById("square1").replaceChildren();
-                document.getElementById("square2").replaceChildren();
-
-                setTimeout(function() {
-                  document.getElementById("square0").replaceChildren();
-                }, 1000);
-              }
-
-              //if shellDirection == "down", then the shell will empty the spaces in the downward direction
-              if (shellDirection == direction[1]) {
-                document.getElementById("square3").replaceChildren();
-                document.getElementById("square6").replaceChildren();
-
-                setTimeout(function() {
-                  document.getElementById("square0").replaceChildren();
-                }, 1000);
-              }
-
-              //if shellDirection == "diagonal", then the shell will empty the spaces in the diagonal direction
-              if (shellDirection == direction[2]) {
-                document.getElementById("square4").replaceChildren();
-                document.getElementById("square8").replaceChildren();
-
-                setTimeout(function() {
-                  document.getElementById("square0").replaceChildren();
-                }, 1000);
-              } 
-            } 
-            else if (event.target.id == "square2") {
-              const direction = ["left", "down", "diagonal"];
-              let randomIndex = Math.floor(Math.random() * direction.length);
-              let shellDirection = direction[randomIndex];
-
-                //if shellDirection == "left", then the shell will empty the spaces in the left direction
-                if (shellDirection == direction[0]) {
-                document.getElementById("square0").replaceChildren();
-                document.getElementById("square1").replaceChildren();
-
-                setTimeout(function() {
-                  document.getElementById("square2").replaceChildren();
-                }, 1000);
-              }
-
-              //if shellDirection == "down", then the shell will empty the spaces in the downward direction
-              if (shellDirection == direction[1]) {
-                document.getElementById("square5").replaceChildren();
-                document.getElementById("square8").replaceChildren();
-
-                setTimeout(function() {
-                  document.getElementById("square2").replaceChildren();
-                }, 1000);
-              }
-
-              //if shellDirection == "diagonal", then the shell will empty the spaces in the diagonal direction
-              if (shellDirection == direction[2]) {
-                document.getElementById("square4").replaceChildren();
-                document.getElementById("square6").replaceChildren();
-
-                setTimeout(function() {
-                  document.getElementById("square2").replaceChildren();
-                }, 1000);
-              }
-            }
-            else if (event.target.id == "square6") {
-              const direction = ["right", "up", "diagonal"];
-              let randomIndex = Math.floor(Math.random() * direction.length);
-              let shellDirection = direction[randomIndex];
-
-                //if shellDirection == "right", then the shell will empty the spaces in the right direction
-                if (shellDirection == direction[0]) {
-                document.getElementById("square7").replaceChildren();
-                document.getElementById("square8").replaceChildren();
-
-                setTimeout(function() {
-                  document.getElementById("square6").replaceChildren();
-                }, 1000);
-              }
-
-              //if shellDirection == "up", then the shell will empty the spaces in the upward direction
-              if (shellDirection == direction[1]) {
-                document.getElementById("square0").replaceChildren();
-                document.getElementById("square3").replaceChildren();
-
-                setTimeout(function() {
-                  document.getElementById("square6").replaceChildren();
-                }, 1000);
-              }
-
-              //if shellDirection == "diagonal", then the shell will empty the spaces in the diagonal direction
-              if (shellDirection == direction[2]) {
-                document.getElementById("square4").replaceChildren();
-                document.getElementById("square2").replaceChildren();
-
-                setTimeout(function() {
-                  document.getElementById("square6").replaceChildren();
-                }, 1000);
-              }
-            }
-            else if (event.target.id == "square8") {
-              const direction = ["left", "up", "diagonal"];
-              let randomIndex = Math.floor(Math.random() * direction.length);
-              let shellDirection = direction[randomIndex];
-
-                //if shellDirection == "left", then the shell will empty the spaces in the left direction
-                if (shellDirection == direction[0]) {
-                document.getElementById("square6").replaceChildren();
-                document.getElementById("square7").replaceChildren();
-
-                setTimeout(function() {
-                  document.getElementById("square8").replaceChildren();
-                }, 1000);
-              }
-
-              //if shellDirection == "up", then the shell will empty the spaces in the upward direction
-              if (shellDirection == direction[1]) {
-                document.getElementById("square2").replaceChildren();
-                document.getElementById("square5").replaceChildren();
-
-                setTimeout(function() {
-                  document.getElementById("square8").replaceChildren();
-                }, 1000);
-              }
-
-              //if shellDirection == "diagonal", then the shell will empty the spaces in the diagonal direction
-              if (shellDirection == direction[2]) {
-                document.getElementById("square0").replaceChildren();
-                document.getElementById("square4").replaceChildren();
-
-                setTimeout(function() {
-                  document.getElementById("square8").replaceChildren();
-                }, 1000);
-              }              
-            }
-            
-            player1TurtleUltimate = false;
+            activateTurtleUltimate(event.target.id, player1TurtleUltimate);
           }
           else {
             let img = document.createElement("img");
@@ -476,48 +332,54 @@
 
         else if (players[1].turn == true) { //if player2's turn...
           //player2 takes its turn.
-          let img = document.createElement("img");
-          imgName = (players[1].character).replace("player-2-","");
-          img.src = "images/" + imgName + ".png";
-          img.style.cssText = "width: 100%";
 
-          document.getElementById(event.target.id).appendChild(img);
-
-          /* The visible bunny-turtle board on the web page is also 
-          represented in the bunnyTurtleBoard array.
-
-          If the player2 clicks #square0 div, then event.target.id == "square0";
-          so bunnyTurtleBoard[0] will be equal to "player2"
-          */
-          if (event.target.id == "square0") {
-            bunnyTurtleBoard[0] = players[1].player;
+          if (player2TurtleUltimate == true) {
+            activateTurtleUltimate(event.target.id, player2TurtleUltimate);
           } 
-          else if (event.target.id == "square1") {
-            bunnyTurtleBoard[1] = players[1].player;
-          }
-          else if (event.target.id == "square2") {
-            bunnyTurtleBoard[2] = players[1].player;
-          }
-          else if (event.target.id == "square3") {
-            bunnyTurtleBoard[3] = players[1].player;
-          }
-          else if (event.target.id == "square4") {
-            bunnyTurtleBoard[4] = players[1].player;
-          }
-          else if (event.target.id == "square5") {
-            bunnyTurtleBoard[5] = players[1].player;
-          }
-          else if (event.target.id == "square6") {
-            bunnyTurtleBoard[6] = players[1].player;
-          }
-          else if (event.target.id == "square7") {
-            bunnyTurtleBoard[7] = players[1].player;
-          }
-          else if (event.target.id == "square8") {
-            bunnyTurtleBoard[8] = players[1].player;
+          else {
+            let img = document.createElement("img");
+            imgName = (players[1].character).replace("player-2-","");
+            img.src = "images/" + imgName + ".png";
+            img.style.cssText = "width: 100%";
+
+            document.getElementById(event.target.id).appendChild(img);
+
+            /* The visible bunny-turtle board on the web page is also 
+            represented in the bunnyTurtleBoard array.
+
+            If the player2 clicks #square0 div, then event.target.id == "square0";
+            so bunnyTurtleBoard[0] will be equal to "player2"
+            */
+            if (event.target.id == "square0") {
+              bunnyTurtleBoard[0] = players[1].player;
+            } 
+            else if (event.target.id == "square1") {
+              bunnyTurtleBoard[1] = players[1].player;
+            }
+            else if (event.target.id == "square2") {
+              bunnyTurtleBoard[2] = players[1].player;
+            }
+            else if (event.target.id == "square3") {
+              bunnyTurtleBoard[3] = players[1].player;
+            }
+            else if (event.target.id == "square4") {
+              bunnyTurtleBoard[4] = players[1].player;
+            }
+            else if (event.target.id == "square5") {
+              bunnyTurtleBoard[5] = players[1].player;
+            }
+            else if (event.target.id == "square6") {
+              bunnyTurtleBoard[6] = players[1].player;
+            }
+            else if (event.target.id == "square7") {
+              bunnyTurtleBoard[7] = players[1].player;
+            }
+            else if (event.target.id == "square8") {
+              bunnyTurtleBoard[8] = players[1].player;
+            }
           }
 
-          //CHECK IF TURTLE WON. 
+          //CHECK IF player2 WON. 
           checkIfPlayerWon(players[1].player);
 
           //Once player2 takes its turn, turn will go over to player1.
@@ -757,6 +619,9 @@
       If player has not picked his character, then the function will simply do nothing. 
       */
 
+      let player1LockedIn = false;
+      let player2LockedIn = false;
+
       document.getElementById("player-1-lock-in-button").addEventListener("click", function(event) { //If #player-1-lock-in-button is clicked, then function(event) will run.
         if (player1SelectedCharacter.length > 1) { //This function will check whether player1 has picked his character. If yes, then...
           players[0].character = player1SelectedCharacter; 
@@ -799,16 +664,189 @@
        else if (players[0].character == "player-1-genghiskhan") {
 
        }
-       else if (player[0].character == "player-1-doctorstrange") {
+       else if (players[0].character == "player-1-doctorstrange") {
 
        }
-       else if (player[0].character == "player-1-scarletwitch") {
+       else if (players[0].character == "player-1-scarletwitch") {
 
        }
-       else if (player[0].character == "player-1-steve") {
+       else if (players[0].character == "player-1-steve") {
 
        }
-     })
+     });
+
+     document.getElementById("player-2-ultimate-button").addEventListener("click", function(event) {
+       if (players[1].character == "player-2-bunny") {
+         player2BunnyUltimate = true;
+       }
+       else if (players[1].character == "player-2-turtle") {
+         player2TurtleUltimate = true;
+       }
+       else if (players[1].character == "player-2-genghiskhan") {
+
+       }
+       else if (players[1].character == "player-2-doctorstrange") {
+
+       }
+       else if (players[1].character == "player-2-scarletwitch") {
+
+       }
+       else if (players[1].character == "player-2-steve") {
+
+       }
+     });
+
+     function activateTurtleUltimate(ticTacToeSquareID, playerTurtleUltimate) {
+       /*
+       1) GOAL: This function will activate Turtle's Ultimate
+       */
+            let shellImg = document.createElement("img");
+            shellImg.src = "images/shell.png";
+            shellImg.style.cssText = "width: 100%;";
+            document.getElementById(ticTacToeSquareID).appendChild(shellImg);
+          
+            if (event.target.id == "square0") {
+              const direction = ["right", "down", "diagonal"];
+              let randomIndex = Math.floor(Math.random() * direction.length);
+              let shellDirection = direction[randomIndex];
+              
+              //if shellDirection == "right", then the shell will empty the spaces in the right direction
+              if (shellDirection == direction[0]) {
+                document.getElementById("square1").replaceChildren();
+                document.getElementById("square2").replaceChildren();
+
+                setTimeout(function() {
+                  document.getElementById("square0").replaceChildren();
+                }, 1000);
+              }
+
+              //if shellDirection == "down", then the shell will empty the spaces in the downward direction
+              if (shellDirection == direction[1]) {
+                document.getElementById("square3").replaceChildren();
+                document.getElementById("square6").replaceChildren();
+
+                setTimeout(function() {
+                  document.getElementById("square0").replaceChildren();
+                }, 1000);
+              }
+
+              //if shellDirection == "diagonal", then the shell will empty the spaces in the diagonal direction
+              if (shellDirection == direction[2]) {
+                document.getElementById("square4").replaceChildren();
+                document.getElementById("square8").replaceChildren();
+
+                setTimeout(function() {
+                  document.getElementById("square0").replaceChildren();
+                }, 1000);
+              } 
+            } 
+            else if (event.target.id == "square2") {
+              const direction = ["left", "down", "diagonal"];
+              let randomIndex = Math.floor(Math.random() * direction.length);
+              let shellDirection = direction[randomIndex];
+
+                //if shellDirection == "left", then the shell will empty the spaces in the left direction
+                if (shellDirection == direction[0]) {
+                document.getElementById("square0").replaceChildren();
+                document.getElementById("square1").replaceChildren();
+
+                setTimeout(function() {
+                  document.getElementById("square2").replaceChildren();
+                }, 1000);
+              }
+
+              //if shellDirection == "down", then the shell will empty the spaces in the downward direction
+              if (shellDirection == direction[1]) {
+                document.getElementById("square5").replaceChildren();
+                document.getElementById("square8").replaceChildren();
+
+                setTimeout(function() {
+                  document.getElementById("square2").replaceChildren();
+                }, 1000);
+              }
+
+              //if shellDirection == "diagonal", then the shell will empty the spaces in the diagonal direction
+              if (shellDirection == direction[2]) {
+                document.getElementById("square4").replaceChildren();
+                document.getElementById("square6").replaceChildren();
+
+                setTimeout(function() {
+                  document.getElementById("square2").replaceChildren();
+                }, 1000);
+              }
+            }
+            else if (event.target.id == "square6") {
+              const direction = ["right", "up", "diagonal"];
+              let randomIndex = Math.floor(Math.random() * direction.length);
+              let shellDirection = direction[randomIndex];
+
+                //if shellDirection == "right", then the shell will empty the spaces in the right direction
+                if (shellDirection == direction[0]) {
+                document.getElementById("square7").replaceChildren();
+                document.getElementById("square8").replaceChildren();
+
+                setTimeout(function() {
+                  document.getElementById("square6").replaceChildren();
+                }, 1000);
+              }
+
+              //if shellDirection == "up", then the shell will empty the spaces in the upward direction
+              if (shellDirection == direction[1]) {
+                document.getElementById("square0").replaceChildren();
+                document.getElementById("square3").replaceChildren();
+
+                setTimeout(function() {
+                  document.getElementById("square6").replaceChildren();
+                }, 1000);
+              }
+
+              //if shellDirection == "diagonal", then the shell will empty the spaces in the diagonal direction
+              if (shellDirection == direction[2]) {
+                document.getElementById("square4").replaceChildren();
+                document.getElementById("square2").replaceChildren();
+
+                setTimeout(function() {
+                  document.getElementById("square6").replaceChildren();
+                }, 1000);
+              }
+            }
+            else if (event.target.id == "square8") {
+              const direction = ["left", "up", "diagonal"];
+              let randomIndex = Math.floor(Math.random() * direction.length);
+              let shellDirection = direction[randomIndex];
+
+                //if shellDirection == "left", then the shell will empty the spaces in the left direction
+                if (shellDirection == direction[0]) {
+                document.getElementById("square6").replaceChildren();
+                document.getElementById("square7").replaceChildren();
+
+                setTimeout(function() {
+                  document.getElementById("square8").replaceChildren();
+                }, 1000);
+              }
+
+              //if shellDirection == "up", then the shell will empty the spaces in the upward direction
+              if (shellDirection == direction[1]) {
+                document.getElementById("square2").replaceChildren();
+                document.getElementById("square5").replaceChildren();
+
+                setTimeout(function() {
+                  document.getElementById("square8").replaceChildren();
+                }, 1000);
+              }
+
+              //if shellDirection == "diagonal", then the shell will empty the spaces in the diagonal direction
+              if (shellDirection == direction[2]) {
+                document.getElementById("square0").replaceChildren();
+                document.getElementById("square4").replaceChildren();
+
+                setTimeout(function() {
+                  document.getElementById("square8").replaceChildren();
+                }, 1000);
+              }              
+            }
+            playerTurtleUltimate = false;
+     }
     </script>
   </body>
 </html>
