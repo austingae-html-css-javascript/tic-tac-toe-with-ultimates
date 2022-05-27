@@ -540,13 +540,47 @@
         document.getElementById("player-2-character-description").innerHTML = "Steve has no ultimate. Just like his default skin, he must play default."
       });
 
+      //character description code (^^^) ends here. 
 
 
-      document.getElementById("player-1-character-selection-div").addEventListener("click", function(event) {
-        /*
-        1) Goal: This function will receive event.target.id, aka the character images' id, s
-        */
-      })
+      /*
+      1) Goal: If a player clicks a character image, then the character image will have a box shadow.
+      If a player then clicks another character image, then the first character image will be unselected and the second character
+      image will be selected. 
+      */
+
+      let player1SelectedCharacter = "";
+
+      document.getElementById("player-1-character-selection-images-div").addEventListener("click", function(event) { //If a character image is clicked, then this function(event) will run.
+        if (event.target.id !== "player-1-character-selection-images-div") { //if event.target.id is not empty space but is actually a character's image
+          document.getElementById(event.target.id).style.cssText = "box-shadow: 0px 0px 2px 2px rgb(0,0,0);"; //the character's image will receive a box shadow 
+
+          if (player1SelectedCharacter.length > 1) {
+            document.getElementById(player1SelectedCharacter).style.cssText = "box-shadow: none;";
+          }
+          player1SelectedCharacter = event.target.id; 
+        }
+      });
+
+
+      let player2SelectedCharacter = "";
+
+      document.getElementById("player-2-character-selection-images-div").addEventListener("click", function(event) { //If a character image is clicked, then this function(event) will run.
+        if (event.target.id !== "player-2-character-selection-images-div") { //if event.target.id is not empty space but is actually a character's image
+          document.getElementById(event.target.id).style.cssText = "box-shadow: 0px 0px 2px 2px rgb(0,0,0);"; //the character's image will receive a box shadow 
+
+          if (player2SelectedCharacter.length > 1) {
+            document.getElementById(player2SelectedCharacter).style.cssText = "box-shadow: none;";
+          }
+          player2SelectedCharacter = event.target.id; 
+        }
+      });
+
+
+
+
+
+
     </script>
   </body>
 </html>
