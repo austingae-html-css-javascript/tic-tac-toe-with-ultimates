@@ -171,16 +171,16 @@
               <img class="character-images" id="player-1-turtle" src="images/turtle.png">
             </div>
             <div class="character-images-div">
-              <img class="character-images" id="player-1-genghiskhan" src="images/genghiskhan.webp">
+              <img class="character-images" id="player-1-genghiskhan" src="images/genghiskhan.png">
             </div>
             <div class="character-images-div">
-              <img class="character-images" id="player-1-doctorstrange" src="images/doctorstrange.webp">
+              <img class="character-images" id="player-1-doctorstrange" src="images/doctorstrange.png">
             </div>
             <div class="character-images-div">
-              <img class="character-images" id="player-1-scarletwitch" src="images/scarletwitch.webp">
+              <img class="character-images" id="player-1-scarletwitch" src="images/scarletwitch.png">
             </div>
             <div>
-              <img class="character-images" id="player-1-steve" src="images/steve.jpg">
+              <img class="character-images" id="player-1-steve" src="images/steve.png">
             </div>
           </div>
 
@@ -209,16 +209,16 @@
               <img class="character-images" id="player-2-turtle" src="images/turtle.png">
             </div>
             <div class="character-images-div">
-              <img class="character-images" id="player-2-genghiskhan" src="images/genghiskhan.webp">
+              <img class="character-images" id="player-2-genghiskhan" src="images/genghiskhan.png">
             </div>
             <div class="character-images-div">
-              <img class="character-images" id="player-2-doctorstrange"  src="images/doctorstrange.webp">
+              <img class="character-images" id="player-2-doctorstrange"  src="images/doctorstrange.png">
             </div>
             <div class="character-images-div">
-              <img class="character-images" id="player-2-scarletwitch"  src="images/scarletwitch.webp">
+              <img class="character-images" id="player-2-scarletwitch"  src="images/scarletwitch.png">
             </div>
             <div>
-              <img class="character-images" id="player-2-steve"  src="images/steve.jpg">
+              <img class="character-images" id="player-2-steve"  src="images/steve.png">
             </div>
           </div>
 
@@ -256,10 +256,11 @@
       startingPlayer();
 
       document.getElementById("middle-div").addEventListener("click", function(event) {
-        if (players[0].turn == true) { //if Bunny's turn...
-          //player Bunny takes its turn.
+        if (players[0].turn == true) { //if player1's turn...
+          //player1 takes its turn.
           let img = document.createElement("img");
-          img.src = "images/bunny.png";
+          imgName = (players[0].character).replace("player-1-","");
+          img.src = "images/" + imgName + ".png";
           img.style.cssText = "width: 100%";
           document.getElementById(event.target.id).appendChild(img);
 
@@ -308,10 +309,11 @@
           document.getElementById("player-turn").innerHTML = "player2";
         }
 
-        else if (players[1].turn == true) { //if Turtle's turn...
-          //player Turtle takes its turn.
+        else if (players[1].turn == true) { //if player2's turn...
+          //player2 takes its turn.
           let img = document.createElement("img");
-          img.src = "images/turtle.png";
+          imgName = (players[1].character).replace("player-2-","");
+          img.src = "images/" + imgName + ".png";
           img.style.cssText = "width: 100%";
           document.getElementById(event.target.id).appendChild(img);
 
@@ -577,7 +579,14 @@
 
 
       /*
-      1) Goal: If #player-1-lock-in-button button is clicked, then function(event) will run. This function will check whether
+      1) Goal: If #player-1-lock-in-button button is clicked, then function(event) will run. This function will check whether player1 has
+      picked his character. If player1 has picked his character, then the function will make players[0].character = player1SelectedCharacter
+      AND will also make the box-shadow of the character image gold color.
+      After the above paragraph has been executed, player1LockedIn will equal true. If player1LockedIn and player2LockedIn are both true,
+      then characterSelectionTime = false. characterSelection(characterSelectionTime) will run; this function will then make the
+      character selection display invisible and make visible the tic-tac-toe game. 
+      
+      If #player-1-lock-in-button button is clicked, then function(event) will run. This function will check whether
       player1 has picked his character. If player has picked his character, then the function will players[0].character = player1SelectedCharacter AND
       will make the box-shadow around the character image "GOLD"
       If player has not picked his character, then the function will simply do nothing. 
