@@ -185,7 +185,7 @@
           </div>
 
           <div class="lock-in-div">
-            <button>LOCK IN</button>
+            <button id="player-1-lock-in-button">LOCK IN</button>
           </div>
         </div>
 
@@ -223,7 +223,7 @@
           </div>
 
           <div class="lock-in-div">
-            <button>LOCK IN</button>
+            <button id="player-2-lock-in-button">LOCK IN</button>
           </div>
         </div>
 
@@ -436,7 +436,6 @@
           }
       }
 
-      
       function characterSelection(characterSelectionTimeBooleanValue) {
         //players' name displayed in character selection page
         document.getElementById("player-1-name").innerHTML = players[0].player;
@@ -462,13 +461,13 @@
           document.getElementById("middle-div").style.cssText = "opacity: 1;";
           document.getElementById("bottom-div").style.cssText = "opacity: 1;";
 
-          document.getElementById("player-1-character-selection-div").style.cssText = "opacity: 1; top: -200px;";
-          document.getElementById("player-2-character-selection-div").style.cssText = "opacity: 1; top: -200px;";
+          document.getElementById("player-1-character-selection-div").style.cssText = "opacity: 0; top: -200px;";
+          document.getElementById("player-2-character-selection-div").style.cssText = "opacity: 0; top: -200px;";
         }
       }
 
       /*
-      //The lines of code below does this: if the player hovers over the character's image,
+      //The lines of code below does this: if the player CLICKS over the character's image,
       then #player-1-character-description paragraph will display that character's ultimate.
 
         Characters' Ultimates: 
@@ -491,52 +490,52 @@
         - Steve has no ultimate. 
       */
 
-      document.getElementById("player-1-bunny").addEventListener("mouseover", function(event) {
+      document.getElementById("player-1-bunny").addEventListener("click", function(event) {
         document.getElementById("player-1-character-description").innerHTML = "Ultimate: With its agility, the bunny can place two squares in one turn."
       });
 
-      document.getElementById("player-1-turtle").addEventListener("mouseover", function(event) {
+      document.getElementById("player-1-turtle").addEventListener("click", function(event) {
         document.getElementById("player-1-character-description").innerHTML = "Ultimate: The Turtle will place its shell on a square. If the opponent does not break the shell with his next turn, then the shell will randomly slide in one direction and empty that direction's squares."
 
       });
 
-      document.getElementById("player-1-genghiskhan").addEventListener("mouseover", function(event) {
+      document.getElementById("player-1-genghiskhan").addEventListener("click", function(event) {
         document.getElementById("player-1-character-description").innerHTML = "Ultimate: Genghis Khan -- the Khan of Khans -- has set out to capture all the lands under the Eternal Blue Sky, and also one of his opponent's squares."
       });
 
-      document.getElementById("player-1-doctorstrange").addEventListener("mouseover", function(event) {
+      document.getElementById("player-1-doctorstrange").addEventListener("click", function(event) {
         document.getElementById("player-1-character-description").innerHTML = "With his time stone, Doctor Strange can reverse time, which means reversing the last two turns. If his opponent activated his ultimate within the last two turns, then the opponent will get his ultimate back."
       });
 
-      document.getElementById("player-1-scarletwitch").addEventListener("mouseover", function(event) {
+      document.getElementById("player-1-scarletwitch").addEventListener("click", function(event) {
         document.getElementById("player-1-character-description").innerHTML = "Able to control minds, Scarlet Witch will make her opponent's next move be randomly placed on the tic-tac-toe board."
       });
 
-      document.getElementById("player-1-steve").addEventListener("mouseover", function(event) {
+      document.getElementById("player-1-steve").addEventListener("click", function(event) {
         document.getElementById("player-1-character-description").innerHTML = "Steve has no ultimate. Just like his default skin, he must play default."
       });
 
-      document.getElementById("player-2-bunny").addEventListener("mouseover", function(event) {
+      document.getElementById("player-2-bunny").addEventListener("click", function(event) {
         document.getElementById("player-2-character-description").innerHTML = "Ultimate: With its agility, the bunny can place two squares in one turn."
       });
 
-      document.getElementById("player-2-turtle").addEventListener("mouseover", function(event) {
+      document.getElementById("player-2-turtle").addEventListener("click", function(event) {
         document.getElementById("player-2-character-description").innerHTML = "Ultimate: The Turtle will place its shell on a square. If the opponent does not break the shell with his next turn, then the shell will randomly slide in one direction and empty that direction's squares."
       });
 
-      document.getElementById("player-2-genghiskhan").addEventListener("mouseover", function(event) {
+      document.getElementById("player-2-genghiskhan").addEventListener("click", function(event) {
         document.getElementById("player-2-character-description").innerHTML = "Ultimate: Genghis Khan -- the Khan of Khans -- has set out to capture all the lands under the Eternal Blue Sky, and also one of his opponent's squares."
       });
 
-      document.getElementById("player-2-doctorstrange").addEventListener("mouseover", function(event) {
+      document.getElementById("player-2-doctorstrange").addEventListener("click", function(event) {
         document.getElementById("player-2-character-description").innerHTML = "With his time stone, Doctor Strange can reverse time, which means reversing the last two turns. If his opponent activated his ultimate within the last two turns, then the opponent will get his ultimate back."
       });
 
-      document.getElementById("player-2-scarletwitch").addEventListener("mouseover", function(event) {
+      document.getElementById("player-2-scarletwitch").addEventListener("click", function(event) {
         document.getElementById("player-2-character-description").innerHTML = "Able to control minds, Scarlet Witch will make her opponent's next move be randomly placed on the tic-tac-toe board."
       });
 
-      document.getElementById("player-2-steve").addEventListener("mouseover", function(event) {
+      document.getElementById("player-2-steve").addEventListener("click", function(event) {
         document.getElementById("player-2-character-description").innerHTML = "Steve has no ultimate. Just like his default skin, he must play default."
       });
 
@@ -575,6 +574,47 @@
           player2SelectedCharacter = event.target.id; 
         }
       });
+
+
+      /*
+      1) Goal: If #player-1-lock-in-button button is clicked, then function(event) will run. This function will check whether
+      player1 has picked his character. If player has picked his character, then the function will players[0].character = player1SelectedCharacter AND
+      will make the box-shadow around the character image "GOLD"
+      If player has not picked his character, then the function will simply do nothing. 
+      */
+
+      document.getElementById("player-1-lock-in-button").addEventListener("click", function(event) { //If #player-1-lock-in-button is clicked, then function(event) will run.
+        if (player1SelectedCharacter.length > 1) { //This function will check whether player1 has picked his character. If yes, then...
+          players[0].character = player1SelectedCharacter; 
+          document.getElementById(player1SelectedCharacter).style.cssText = "box-shadow: 0px 0px 4px 4px rgb(255, 215, 0);"; //have the character image have a gold-colored box shadow
+
+          player1LockedIn = true; 
+
+          if (player1LockedIn == true && player2LockedIn == true) {
+            characterSelectionTime = false;
+            characterSelection(characterSelectionTime);
+          }
+          
+        }
+      });
+
+      document.getElementById("player-2-lock-in-button").addEventListener("click", function(event) { //If #player-2-lock-in-button is clicked, then function(event) will run.
+        if (player2SelectedCharacter.length > 1) { //This function will check whether player2 has picked his character. If yes, then...
+          players[1].character = player2SelectedCharacter;
+          document.getElementById(player2SelectedCharacter).style.cssText = "box-shadow: 0px 0px 4px 4px rgb(255, 215, 0);"; //have the character image's have a gold-colored box shadow
+
+          player2LockedIn = true;
+
+          if (player1LockedIn == true && player2LockedIn == true) {
+            characterSelectionTime = false;
+            characterSelection(characterSelectionTime);
+          }
+        }
+      });
+
+
+
+
 
 
 
