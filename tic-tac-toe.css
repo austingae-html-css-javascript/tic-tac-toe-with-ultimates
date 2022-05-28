@@ -1,0 +1,100 @@
+body {
+  font-family: 'Carter One';
+}
+
+p {
+  display: inline-block;
+  margin: 0px;
+}
+
+#bunny-turtle-toe-DIV {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: relative;
+}
+
+#bunny-in-the-title, #bunny-scoreboard {
+  color: rgb(243,170,184);
+}
+
+#turtle-in-the-title, #turtle-scoreboard {
+  color: rgb(19,137,102);
+}
+
+#toe-in-the-title {
+  color: rgb(201,142,130);
+}
+
+#middle-div {
+  display:grid;
+  grid-template-rows: 170px 170px 170px;
+  grid-template-columns: 170px 170px 170px;
+
+  border-style: solid;
+  border-color: black;
+}
+
+.bunny-turtle-toe-squares {
+  border-style: solid;
+  border-color: black;
+}
+
+#bottom-div {
+  display:flex;
+  flex-direction: row;
+  
+  margin-top: 20px;
+}
+
+#player2-ultimate-div{
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+#player-1-character-selection-div,
+#player-2-character-selection-div {
+  position: absolute; 
+}
+
+.player-name-and-character-description-div {
+  display:flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.character-description-div {
+  width: 440px;
+  height: 40px;
+}
+
+#player-1-character-description, 
+#player-2-character-description {
+  font-size: 12px;
+}
+
+.player-name-div {
+  margin-right: 20px;
+}
+
+#player-1-character-selection-images-div, 
+#player-2-character-selection-images-div {
+  display:flex;
+  flex-direction: row;
+
+  margin-bottom: 20px;
+}
+
+.character-images {
+  width: 75px;
+  border-style: solid;
+}
+
+.character-images-div {
+  margin-right: 10px;
+}
+
+.lock-in-div {
+  float: right; 
+}

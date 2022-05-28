@@ -7,114 +7,16 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!--title of the website-->
     <title>Bunny-Turtle-Toe</title>
 
+    <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
 
-    <style>
-      body {
-        font-family: 'Carter One';
-      }
-
-      p {
-        display: inline-block;
-        margin: 0px;
-      }
-
-      #bunny-turtle-toe-DIV {
-        display:flex;
-        flex-direction: column;
-        align-items: center;
-
-        position: relative;
-      }
-
-      #bunny-in-the-title, #bunny-scoreboard {
-        color: rgb(243,170,184);
-      }
-
-      #turtle-in-the-title, #turtle-scoreboard {
-        color: rgb(19,137,102);
-      }
-
-      #toe-in-the-title {
-        color: rgb(201,142,130);
-      }
-
-      #middle-div {
-        display:grid;
-        grid-template-rows: 170px 170px 170px;
-        grid-template-columns: 170px 170px 170px;
-
-        border-style: solid;
-        border-color: black;
-      }
-
-      .bunny-turtle-toe-squares {
-        border-style: solid;
-        border-color: black;
-      }
-
-      #bottom-div {
-        display:flex;
-        flex-direction: row;
-        
-        margin-top: 20px;
-      }
-
-      #player2-ultimate-div{
-        margin-left: 50px;
-        margin-right: 50px;
-      }
-
-      #player-1-character-selection-div,
-      #player-2-character-selection-div {
-        position: absolute; 
-      }
-
-      .player-name-and-character-description-div {
-        display:flex;
-        flex-direction: row;
-        margin-bottom: 20px;
-      }
-
-      .character-description-div {
-        width: 440px;
-        height: 40px;
-      }
-
-      #player-1-character-description, 
-      #player-2-character-description {
-        font-size: 12px;
-      }
-
-      .player-name-div {
-        margin-right: 20px;
-      }
-
-      #player-1-character-selection-images-div, 
-      #player-2-character-selection-images-div {
-        display:flex;
-        flex-direction: row;
-
-        margin-bottom: 20px;
-      }
-
-      .character-images {
-        width: 75px;
-        border-style: solid;
-      }
-
-      .character-images-div {
-        margin-right: 10px;
-      }
-
-      .lock-in-div {
-        float: right; 
-      }
-    </style>
+    <!--tic-tac-toe.css file-->
+    <link rel="stylesheet" href="tic-tac-toe.css"> 
   </head>
 
   <body>
@@ -257,10 +159,15 @@
       let player2BunnyUltimate = false;
       let player1TurtleUltimate = false;
       let player2TurtleUltimate = false;
+      let doctorStrangeBoardMoves = [];
 
       document.getElementById("middle-div").addEventListener("click", function(event) {
         if (bunnyTurtleBoard[event.target.id.replace("square","")] == "") { //if the bunnyTurtleBoard[index] is empty, then proceed to place the character image on that square
         
+          if (players[0].character == "player-1-doctorstrange" || players[1].character == "player-2-doctorstrange") {
+            doctorStrangeBoardMoves.push(event.target.id);
+          }
+
           //PLAYER 1
           if (players[0].turn == true) { //if player1's turn...
           //player1 takes its turn.
@@ -674,8 +581,28 @@
        else if (players[0].character == "player-1-genghiskhan") {
 
        }
-       else if (players[0].character == "player-1-doctorstrange") {
+       else if (players[0].character == "player-1-doctorstrange") { //if player1 activates doctor strange 
+        if (players[0].turn == true && players[1].turn == false) { //and if it is player1's turn, then...
 
+          //the last two moves will disappear on the bunnyTurtleBoard array.
+          index1 = (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1]).replace("square","");
+          index2 = (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2]).replace("square","");
+          bunnyTurtleBoard[index1] = "";
+          bunnyTurtleBoard[index2] = "";
+
+
+          //the last two moves will disappear on the screen itself as well
+          document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1]).replaceChildren();
+          document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2]).replaceChildren();
+
+          //time goes back last two moves, which means reversing opponent's last move and doctor strange's last
+          //move. this means that it is doctor strange's turn. 
+          players[0].turn = true;
+          players[1].turn = false;
+
+          //display on the screen that it is doctor strange's turn
+          document.getElementById("player-turn").innerHTML = "player1";
+        }
        }
        else if (players[0].character == "player-1-scarletwitch") {
 
