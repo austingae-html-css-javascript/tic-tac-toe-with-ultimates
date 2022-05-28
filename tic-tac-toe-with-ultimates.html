@@ -582,27 +582,7 @@
 
        }
        else if (players[0].character == "player-1-doctorstrange") { //if player1 activates doctor strange 
-        if (players[0].turn == true && players[1].turn == false) { //and if it is player1's turn, then...
-
-          //the last two moves will disappear on the bunnyTurtleBoard array.
-          index1 = (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1]).replace("square","");
-          index2 = (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2]).replace("square","");
-          bunnyTurtleBoard[index1] = "";
-          bunnyTurtleBoard[index2] = "";
-
-
-          //the last two moves will disappear on the screen itself as well
-          document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1]).replaceChildren();
-          document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2]).replaceChildren();
-
-          //time goes back last two moves, which means reversing opponent's last move and doctor strange's last
-          //move. this means that it is doctor strange's turn. 
-          players[0].turn = true;
-          players[1].turn = false;
-
-          //display on the screen that it is doctor strange's turn
-          document.getElementById("player-turn").innerHTML = "player1";
-        }
+        activateDoctorStrangeUltimate(0);
        }
        else if (players[0].character == "player-1-scarletwitch") {
 
@@ -623,7 +603,7 @@
 
        }
        else if (players[1].character == "player-2-doctorstrange") {
-
+        activateDoctorStrangeUltimate(1, 0);
        }
        else if (players[1].character == "player-2-scarletwitch") {
 
@@ -633,6 +613,7 @@
        }
      });
 
+     
      function activateTurtleUltimate(ticTacToeSquareID, playerTurtleUltimate) {
        /*
        1) GOAL: This function will activate Turtle's Ultimate
@@ -807,6 +788,30 @@
               }              
             }
             playerTurtleUltimate = false;
+     }
+    
+     function activateDoctorStrangeUltimate(doctorStrangePlayerNumber, otherPlayerNumber) {
+       if (players[doctorStrangePlayerNumber].turn == true) { //and if it is player1's turn, then...
+
+          //the last two moves will disappear on the bunnyTurtleBoard array.
+          index1 = (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1]).replace("square","");
+          index2 = (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2]).replace("square","");
+          bunnyTurtleBoard[index1] = "";
+          bunnyTurtleBoard[index2] = "";
+
+
+          //the last two moves will disappear on the screen itself as well
+          document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1]).replaceChildren();
+          document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2]).replaceChildren();
+
+          //time goes back last two moves, which means reversing opponent's last move and doctor strange's last
+          //move. this means that it is doctor strange's turn. 
+          players[doctorStrangePlayerNumber].turn = true;
+          players[otherPlayerNumber].turn = false;
+
+          //display on the screen that it is doctor strange's turn
+          document.getElementById("player-turn").innerHTML = "player" + (doctorStrangePlayerNumber+1);
+        }
      }
     </script>
   </body>
