@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+
+<body>
+  <div id="main-div">
+    <p>
+      a
+    </p>
+    <p>
+      b
+    </p>
+    <p>
+      c
+    </p>
+  </div>
+  <script>
+    alert(document.getElementById("main-div").contains(document.getElementsByTagName("p")[2])); 
+    //does document.getElementById("main-div") contains a paragraph with the index of 1?
+    //output: true or false. in this case, true
+  </script>
+</body>

@@ -259,8 +259,10 @@
       let player2TurtleUltimate = false;
 
       document.getElementById("middle-div").addEventListener("click", function(event) {
-        //PLAYER 1
-        if (players[0].turn == true) { //if player1's turn...
+        if (bunnyTurtleBoard[event.target.id.replace("square","")] == "") { //if the bunnyTurtleBoard[index] is empty, then proceed to place the character image on that square
+        
+          //PLAYER 1
+          if (players[0].turn == true) { //if player1's turn...
           //player1 takes its turn.
 
           if (player1TurtleUltimate == true) {
@@ -328,80 +330,77 @@
           }
         }
 
-
-
-
-        //PLAYER 2
-
-        else if (players[1].turn == true) { //if player2's turn...
+          //PLAYER 2
+          else if (players[1].turn == true) { //if player2's turn...
           //player2 takes its turn.
 
-          if (player2TurtleUltimate == true) {
-            activateTurtleUltimate(event.target.id, player2TurtleUltimate);
-          } 
-          else {
-            let img = document.createElement("img");
-            imgName = (players[1].character).replace("player-2-","");
-            img.src = "images/" + imgName + ".png";
-            img.style.cssText = "width: 100%";
-
-            document.getElementById(event.target.id).appendChild(img);
-
-            /* The visible bunny-turtle board on the web page is also 
-            represented in the bunnyTurtleBoard array.
-
-            If the player2 clicks #square0 div, then event.target.id == "square0";
-            so bunnyTurtleBoard[0] will be equal to "player2"
-            */
-            if (event.target.id == "square0") {
-              bunnyTurtleBoard[0] = players[1].player;
+            if (player2TurtleUltimate == true) {
+              activateTurtleUltimate(event.target.id, player2TurtleUltimate);
             } 
-            else if (event.target.id == "square1") {
-              bunnyTurtleBoard[1] = players[1].player;
+            else {
+              let img = document.createElement("img");
+              imgName = (players[1].character).replace("player-2-","");
+              img.src = "images/" + imgName + ".png";
+              img.style.cssText = "width: 100%";
+
+              document.getElementById(event.target.id).appendChild(img);
+
+              /* The visible bunny-turtle board on the web page is also 
+              represented in the bunnyTurtleBoard array.
+
+              If the player2 clicks #square0 div, then event.target.id == "square0";
+              so bunnyTurtleBoard[0] will be equal to "player2"
+              */
+              if (event.target.id == "square0") {
+                bunnyTurtleBoard[0] = players[1].player;
+              } 
+              else if (event.target.id == "square1") {
+                bunnyTurtleBoard[1] = players[1].player;
+              }
+              else if (event.target.id == "square2") {
+                bunnyTurtleBoard[2] = players[1].player;
+              }
+              else if (event.target.id == "square3") {
+                bunnyTurtleBoard[3] = players[1].player;
+              }
+              else if (event.target.id == "square4") {
+                bunnyTurtleBoard[4] = players[1].player;
+              }
+              else if (event.target.id == "square5") {
+                bunnyTurtleBoard[5] = players[1].player;
+              }
+              else if (event.target.id == "square6") {
+                bunnyTurtleBoard[6] = players[1].player;
+              }
+              else if (event.target.id == "square7") {
+                bunnyTurtleBoard[7] = players[1].player;
+              }
+              else if (event.target.id == "square8") {
+                bunnyTurtleBoard[8] = players[1].player;
+              }
             }
-            else if (event.target.id == "square2") {
-              bunnyTurtleBoard[2] = players[1].player;
+
+            //CHECK IF player2 WON. 
+            checkIfPlayerWon(players[1].player);
+
+
+            //CHECK IF PLAYER2 BUNNY ULTIMATE IS ON. IF IT IS NOT, THEN PLAYER1's TURN. IF IT IS ON, THEN PLAYER1's TURN ONE MORE TIME.
+            if (player2BunnyUltimate == false) {
+              //Once player1 takes its turn, turn will go over to player2. 
+              players[1].turn = false;
+              players[0].turn = true;
+              
+              //#player-turn paragraph will now display "Turn: player1"
+              document.getElementById("player-turn").innerHTML = "player1";
             }
-            else if (event.target.id == "square3") {
-              bunnyTurtleBoard[3] = players[1].player;
-            }
-            else if (event.target.id == "square4") {
-              bunnyTurtleBoard[4] = players[1].player;
-            }
-            else if (event.target.id == "square5") {
-              bunnyTurtleBoard[5] = players[1].player;
-            }
-            else if (event.target.id == "square6") {
-              bunnyTurtleBoard[6] = players[1].player;
-            }
-            else if (event.target.id == "square7") {
-              bunnyTurtleBoard[7] = players[1].player;
-            }
-            else if (event.target.id == "square8") {
-              bunnyTurtleBoard[8] = players[1].player;
+            else if (player2BunnyUltimate == true) {
+              players[1].turn = true;
+              players[0].turn = false;
+
+              player2BunnyUltimate = false;
             }
           }
-
-          //CHECK IF player2 WON. 
-          checkIfPlayerWon(players[1].player);
-
-
-          //CHECK IF PLAYER2 BUNNY ULTIMATE IS ON. IF IT IS NOT, THEN PLAYER1's TURN. IF IT IS ON, THEN PLAYER1's TURN ONE MORE TIME.
-          if (player2BunnyUltimate == false) {
-            //Once player1 takes its turn, turn will go over to player2. 
-            players[1].turn = false;
-            players[0].turn = true;
-            
-            //#player-turn paragraph will now display "Turn: player1"
-            document.getElementById("player-turn").innerHTML = "player1";
-          }
-          else if (player2BunnyUltimate == true) {
-            players[1].turn = true;
-            players[0].turn = false;
-
-            player2BunnyUltimate = false;
-          }
-        }          
+        }
       });
 
       function startingPlayer() { 
@@ -725,6 +724,8 @@
               if (shellDirection == direction[0]) {
                 document.getElementById("square1").replaceChildren();
                 document.getElementById("square2").replaceChildren();
+                bunnyTurtleBoard[1] = "";
+                bunnyTurtleBoard[2] = "";
 
                 setTimeout(function() {
                   document.getElementById("square0").replaceChildren();
@@ -735,6 +736,8 @@
               if (shellDirection == direction[1]) {
                 document.getElementById("square3").replaceChildren();
                 document.getElementById("square6").replaceChildren();
+                bunnyTurtleBoard[3] = "";
+                bunnyTurtleBoard[6] = "";
 
                 setTimeout(function() {
                   document.getElementById("square0").replaceChildren();
@@ -745,6 +748,8 @@
               if (shellDirection == direction[2]) {
                 document.getElementById("square4").replaceChildren();
                 document.getElementById("square8").replaceChildren();
+                bunnyTurtleBoard[4] = "";
+                bunnyTurtleBoard[8] = "";
 
                 setTimeout(function() {
                   document.getElementById("square0").replaceChildren();
@@ -760,6 +765,8 @@
                 if (shellDirection == direction[0]) {
                 document.getElementById("square0").replaceChildren();
                 document.getElementById("square1").replaceChildren();
+                bunnyTurtleBoard[0] = "";
+                bunnyTurtleBoard[1] = "";
 
                 setTimeout(function() {
                   document.getElementById("square2").replaceChildren();
@@ -770,6 +777,8 @@
               if (shellDirection == direction[1]) {
                 document.getElementById("square5").replaceChildren();
                 document.getElementById("square8").replaceChildren();
+                bunnyTurtleBoard[5] = "";
+                bunnyTurtleBoard[8] = "";
 
                 setTimeout(function() {
                   document.getElementById("square2").replaceChildren();
@@ -780,6 +789,8 @@
               if (shellDirection == direction[2]) {
                 document.getElementById("square4").replaceChildren();
                 document.getElementById("square6").replaceChildren();
+                bunnyTurtleBoard[4] = "";
+                bunnyTurtleBoard[6] = "";
 
                 setTimeout(function() {
                   document.getElementById("square2").replaceChildren();
@@ -795,6 +806,8 @@
                 if (shellDirection == direction[0]) {
                 document.getElementById("square7").replaceChildren();
                 document.getElementById("square8").replaceChildren();
+                bunnyTurtleBoard[7] = "";
+                bunnyTurtleBoard[8] = "";
 
                 setTimeout(function() {
                   document.getElementById("square6").replaceChildren();
@@ -805,6 +818,8 @@
               if (shellDirection == direction[1]) {
                 document.getElementById("square0").replaceChildren();
                 document.getElementById("square3").replaceChildren();
+                bunnyTurtleBoard[0] = "";
+                bunnyTurtleBoard[3] = "";
 
                 setTimeout(function() {
                   document.getElementById("square6").replaceChildren();
@@ -815,6 +830,8 @@
               if (shellDirection == direction[2]) {
                 document.getElementById("square4").replaceChildren();
                 document.getElementById("square2").replaceChildren();
+                bunnyTurtleBoard[4] = "";
+                bunnyTurtleBoard[2] = "";
 
                 setTimeout(function() {
                   document.getElementById("square6").replaceChildren();
@@ -830,6 +847,8 @@
                 if (shellDirection == direction[0]) {
                 document.getElementById("square6").replaceChildren();
                 document.getElementById("square7").replaceChildren();
+                bunnyTurtleBoard[6] = "";
+                bunnyTurtleBoard[7] = "";
 
                 setTimeout(function() {
                   document.getElementById("square8").replaceChildren();
@@ -840,6 +859,8 @@
               if (shellDirection == direction[1]) {
                 document.getElementById("square2").replaceChildren();
                 document.getElementById("square5").replaceChildren();
+                bunnyTurtleBoard[2] = "";
+                bunnyTurtleBoard[5] = "";
 
                 setTimeout(function() {
                   document.getElementById("square8").replaceChildren();
@@ -850,6 +871,8 @@
               if (shellDirection == direction[2]) {
                 document.getElementById("square0").replaceChildren();
                 document.getElementById("square4").replaceChildren();
+                bunnyTurtleBoard[0] = "";
+                bunnyTurtleBoard[4] = "";
 
                 setTimeout(function() {
                   document.getElementById("square8").replaceChildren();
