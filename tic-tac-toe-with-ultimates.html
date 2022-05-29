@@ -160,7 +160,6 @@
       let player1TurtleUltimate = false;
       let player2TurtleUltimate = false;
       let doctorStrangeBoardMoves = [];
-      let player1ScarletWitchUltimate = false;
 
       document.getElementById("middle-div").addEventListener("click", function(event) {
         if (bunnyTurtleBoard[event.target.id.replace("square","")] == "") { //if the bunnyTurtleBoard[index] is empty, then proceed to place the character image on that square
@@ -581,7 +580,33 @@
          player1TurtleUltimate = true;
        }
        else if (players[0].character == "player-1-genghiskhan") {
+         let player2List = [];
+         for (let i = 0; i < bunnyTurtleBoard.length; i++) {
+           if ("player2" == bunnyTurtleBoard[i]) {
+             player2List.push(i);
+           }
+         }
 
+         let randomIndex = Math.floor(Math.random() * player2List.length);
+         let chosenIndex = player2List[randomIndex];
+         console.log(chosenIndex);
+         
+         let squareName = "square" + chosenIndex;
+         document.getElementById(squareName).replaceChildren();
+
+         let genghisKhanImage = document.createElement("img");
+         genghisKhanImage.src = "images/genghiskhan.png";
+         genghisKhanImage.style.cssText = "width: 100%;";
+
+         document.getElementById(squareName).appendChild(genghisKhanImage);
+         bunnyTurtleBoard[chosenIndex] = "player1";
+
+         
+/*
+         let randomIndex = Math.floor(Math.random() * player2List.length-1);
+         let chosenIndex = player2List[randomIndex];
+         console.log(chosenIndex);
+         */
        }
        else if (players[0].character == "player-1-doctorstrange") { //if player1 activates doctor strange 
         activateDoctorStrangeUltimate(0);
