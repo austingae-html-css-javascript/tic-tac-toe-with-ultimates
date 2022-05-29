@@ -338,6 +338,17 @@
           players[1].turn = true;
           players[0].turn = false;
         }
+
+
+        /*Fixing Bug:
+        Bug: After character selection is over, sometimes, the tic-tac-toe board has a broken image in one of the squares.
+        Solution: 
+        */ 
+       for (let i = 0; i < bunnyTurtleBoard.length; i++) {
+         let squareAndNumber = "square" + i;
+         document.getElementById(squareAndNumber).replaceChildren();
+       }
+
       }
 
       function checkIfPlayerWon(boardPlayer) { 
@@ -601,6 +612,10 @@
          document.getElementById(squareName).appendChild(genghisKhanImage);
          bunnyTurtleBoard[chosenIndex] = "player1";
 
+         players[0].turn = false;
+         players[1].turn = true;
+         document.getElementById("player-turn").innerHTML = "player2"
+
          checkIfPlayerWon(players[0].player);
        }
        else if (players[0].character == "player-1-doctorstrange") { //if player1 activates doctor strange 
@@ -614,7 +629,7 @@
          checkIfPlayerWon(players[1].player); 
        }
        else if (players[0].character == "player-1-steve") {
-         
+
        }
      });
 
@@ -646,6 +661,11 @@
 
          document.getElementById(squareName).appendChild(genghisKhanImage);
          bunnyTurtleBoard[chosenIndex] = "player2";
+
+         players[1].turn = false;
+         players[0].turn = true;
+         document.getElementById("player-turn").innerHTML = "player1"
+         
          checkIfPlayerWon(players[1].player);
        }
 
