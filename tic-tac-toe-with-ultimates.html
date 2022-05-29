@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
 
     <!--tic-tac-toe.css file-->
-    <link rel="stylesheet" href="tic-tac-toe.css"> 
+    <link rel="stylesheet" href="tic-tac-toe-with-ultimates.css"> 
   </head>
 
   <body>
@@ -160,6 +160,7 @@
       let player1TurtleUltimate = false;
       let player2TurtleUltimate = false;
       let doctorStrangeBoardMoves = [];
+      let player1ScarletWitchUltimate = false;
 
       document.getElementById("middle-div").addEventListener("click", function(event) {
         if (bunnyTurtleBoard[event.target.id.replace("square","")] == "") { //if the bunnyTurtleBoard[index] is empty, then proceed to place the character image on that square
@@ -239,8 +240,9 @@
 
           //PLAYER 2
           else if (players[1].turn == true) { //if player2's turn...
-          //player2 takes its turn.
 
+          //player2 takes its turn.
+          
             if (player2TurtleUltimate == true) {
               activateTurtleUltimate(event.target.id, player2TurtleUltimate);
             } 
@@ -252,7 +254,7 @@
 
               document.getElementById(event.target.id).appendChild(img);
 
-              /* The visible bunny-turtle board on the web page is also 
+               /*The visible bunny-turtle board on the web page is also 
               represented in the bunnyTurtleBoard array.
 
               If the player2 clicks #square0 div, then event.target.id == "square0";
@@ -585,7 +587,9 @@
         activateDoctorStrangeUltimate(0);
        }
        else if (players[0].character == "player-1-scarletwitch") {
-
+         if (players[1].turn == true) {
+           document.getElementById("player-turn").innerHTML = "player1 plays for player2";
+         }
        }
        else if (players[0].character == "player-1-steve") {
 
@@ -606,7 +610,9 @@
         activateDoctorStrangeUltimate(1, 0);
        }
        else if (players[1].character == "player-2-scarletwitch") {
-
+        if (players[0].turn == true) {
+           document.getElementById("player-turn").innerHTML = "player2 plays for player1";
+         }
        }
        else if (players[1].character == "player-2-steve") {
 

@@ -56,6 +56,10 @@ p {
   margin-right: 50px;
 }
 
+#player-turn-div {
+  width: 105px;
+}
+
 #player-1-character-selection-div,
 #player-2-character-selection-div {
   position: absolute; 
