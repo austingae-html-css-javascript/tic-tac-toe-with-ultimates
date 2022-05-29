@@ -601,23 +601,20 @@
          document.getElementById(squareName).appendChild(genghisKhanImage);
          bunnyTurtleBoard[chosenIndex] = "player1";
 
-         
-/*
-         let randomIndex = Math.floor(Math.random() * player2List.length-1);
-         let chosenIndex = player2List[randomIndex];
-         console.log(chosenIndex);
-         */
+         checkIfPlayerWon(players[0].player);
        }
        else if (players[0].character == "player-1-doctorstrange") { //if player1 activates doctor strange 
         activateDoctorStrangeUltimate(0);
+        checkIfPlayerWon(players[1].player);
        }
        else if (players[0].character == "player-1-scarletwitch") {
          if (players[1].turn == true) {
            document.getElementById("player-turn").innerHTML = "player1 plays for player2";
          }
+         checkIfPlayerWon(players[1].player); 
        }
        else if (players[0].character == "player-1-steve") {
-
+         
        }
      });
 
@@ -629,15 +626,38 @@
          player2TurtleUltimate = true;
        }
        else if (players[1].character == "player-2-genghiskhan") {
+        let player1List = [];
+         for (let i = 0; i < bunnyTurtleBoard.length; i++) {
+           if ("player1" == bunnyTurtleBoard[i]) {
+             player1List.push(i);
+           }
+         }
 
+         let randomIndex = Math.floor(Math.random() * player1List.length);
+         let chosenIndex = player1List[randomIndex];
+         console.log(chosenIndex);
+         
+         let squareName = "square" + chosenIndex;
+         document.getElementById(squareName).replaceChildren();
+
+         let genghisKhanImage = document.createElement("img");
+         genghisKhanImage.src = "images/genghiskhan.png";
+         genghisKhanImage.style.cssText = "width: 100%;";
+
+         document.getElementById(squareName).appendChild(genghisKhanImage);
+         bunnyTurtleBoard[chosenIndex] = "player2";
+         checkIfPlayerWon(players[1].player);
        }
+
        else if (players[1].character == "player-2-doctorstrange") {
         activateDoctorStrangeUltimate(1, 0);
+        checkIfPlayerWon(players[1].player);
        }
        else if (players[1].character == "player-2-scarletwitch") {
         if (players[0].turn == true) {
            document.getElementById("player-turn").innerHTML = "player2 plays for player1";
          }
+        checkIfPlayerWon(players[1].player)
        }
        else if (players[1].character == "player-2-steve") {
 
