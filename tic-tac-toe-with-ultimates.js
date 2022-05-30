@@ -109,11 +109,6 @@ document.getElementById("middle-div").addEventListener("click", function(event) 
     else if (players[1].turn == true) { //if player2's turn...
 
     //player2 takes its turn.
-
-      if (players[0].character == "player-1-doctorstrange" || players[1].character == "player-2-doctorstrange") {
-        player1And2doctorStrangeBoardMoves.push(event.target.id);
-      }      
-    
       if (player2TurtleUltimate == true) {
         activateTurtleUltimate(event.target.id, player2TurtleUltimate);
       } 
@@ -541,7 +536,9 @@ document.getElementById("player-2-ultimate-button").addEventListener("click", fu
 
    players[1].turn = false;
    players[0].turn = true;
-   document.getElementById("player-turn").innerHTML = "player1"
+   document.getElementById("player-turn").innerHTML = "player1";
+
+   player1And2doctorStrangeBoardMoves.push(squareName + "genghiskhan");
    
    checkIfPlayerWon(players[1].player);
  }
@@ -742,15 +739,20 @@ function activateDoctorStrangeUltimate(doctorStrangeBoardMoves, doctorStrangePla
  if (players[doctorStrangePlayerNumber].turn == true) { //and if it is player1's turn, then...
 
     //the last two moves will disappear on the bunnyTurtleBoard array.
-    index1 = (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1]).replace("square","");
-    index2 = (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2]).replace("square","");
+    let index1 = (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1]).replace("square","");
+    let index2 = (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2]).replace("square","");
+    index1 = index1.replace("genghiskhan", "");
+    index2 = index2.replace("genghiskhan", "");
+    console.log(index1);
+
+
     bunnyTurtleBoard[index1] = "";
     bunnyTurtleBoard[index2] = "";
 
 
     //the last two moves will disappear on the screen itself as well
-    document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1]).replaceChildren();
-    document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2]).replaceChildren();
+    document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1].replace("genghiskhan", "")).replaceChildren();
+    document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2].replace("genghiskhan","")).replaceChildren();
 
     //time goes back last two moves, which means reversing opponent's last move and doctor strange's last
     //move. this means that it is doctor strange's turn. 
