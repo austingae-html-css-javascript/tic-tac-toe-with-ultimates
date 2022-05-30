@@ -27,13 +27,13 @@ let player1BunnyUltimate = false;
 let player2BunnyUltimate = false;
 let player1TurtleUltimate = false;
 let player2TurtleUltimate = false;
-let doctorStrangeBoardMoves = [];
+let player1And2doctorStrangeBoardMoves = [];
 
 document.getElementById("middle-div").addEventListener("click", function(event) {
   if (bunnyTurtleBoard[event.target.id.replace("square","")] == "") { //if the bunnyTurtleBoard[index] is empty, then proceed to place the character image on that square
   
     if (players[0].character == "player-1-doctorstrange" || players[1].character == "player-2-doctorstrange") {
-      doctorStrangeBoardMoves.push(event.target.id);
+      player1And2doctorStrangeBoardMoves.push(event.target.id);
     }
 
     //PLAYER 1
@@ -109,6 +109,10 @@ document.getElementById("middle-div").addEventListener("click", function(event) 
     else if (players[1].turn == true) { //if player2's turn...
 
     //player2 takes its turn.
+
+      if (players[0].character == "player-1-doctorstrange" || players[1].character == "player-2-doctorstrange") {
+        player1And2doctorStrangeBoardMoves.push(event.target.id);
+      }      
     
       if (player2TurtleUltimate == true) {
         activateTurtleUltimate(event.target.id, player2TurtleUltimate);
@@ -484,10 +488,13 @@ document.getElementById("player-1-ultimate-button").addEventListener("click", fu
    players[1].turn = true;
    document.getElementById("player-turn").innerHTML = "player2"
 
+   player1And2doctorStrangeBoardMoves.push(squareName);
+   
+
    checkIfPlayerWon(players[0].player);
  }
  else if (players[0].character == "player-1-doctorstrange") { //if player1 activates doctor strange 
-  activateDoctorStrangeUltimate(0);
+  activateDoctorStrangeUltimate(player1And2doctorStrangeBoardMoves, 0, 1);
   checkIfPlayerWon(players[1].player);
  }
  else if (players[0].character == "player-1-scarletwitch") {
@@ -500,6 +507,8 @@ document.getElementById("player-1-ultimate-button").addEventListener("click", fu
 
  }
 });
+
+
 
 document.getElementById("player-2-ultimate-button").addEventListener("click", function(event) {
  if (players[1].character == "player-2-bunny") {
@@ -538,7 +547,7 @@ document.getElementById("player-2-ultimate-button").addEventListener("click", fu
  }
 
  else if (players[1].character == "player-2-doctorstrange") {
-  activateDoctorStrangeUltimate(1, 0);
+  activateDoctorStrangeUltimate(player1And2doctorStrangeBoardMoves, 1, 0);
   checkIfPlayerWon(players[1].player);
  }
  else if (players[1].character == "player-2-scarletwitch") {
@@ -729,7 +738,7 @@ function activateTurtleUltimate(ticTacToeSquareID, playerTurtleUltimate) {
       playerTurtleUltimate = false;
 }
 
-function activateDoctorStrangeUltimate(doctorStrangePlayerNumber, otherPlayerNumber) {
+function activateDoctorStrangeUltimate(doctorStrangeBoardMoves, doctorStrangePlayerNumber, otherPlayerNumber) {
  if (players[doctorStrangePlayerNumber].turn == true) { //and if it is player1's turn, then...
 
     //the last two moves will disappear on the bunnyTurtleBoard array.
