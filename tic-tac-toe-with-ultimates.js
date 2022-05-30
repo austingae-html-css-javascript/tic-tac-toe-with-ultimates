@@ -474,6 +474,7 @@ document.getElementById("player-1-ultimate-button").addEventListener("click", fu
 
    let genghisKhanImage = document.createElement("img");
    genghisKhanImage.src = "images/genghiskhan.png";
+   genghisKhanImage.id = "genghiskhanultimate";
    genghisKhanImage.style.cssText = "width: 100%;";
 
    document.getElementById(squareName).appendChild(genghisKhanImage);
@@ -483,7 +484,7 @@ document.getElementById("player-1-ultimate-button").addEventListener("click", fu
    players[1].turn = true;
    document.getElementById("player-turn").innerHTML = "player2"
 
-   player1And2doctorStrangeBoardMoves.push(squareName);
+   player1And2doctorStrangeBoardMoves.push(squareName + "genghiskhan");
    
 
    checkIfPlayerWon(players[0].player);
@@ -529,6 +530,7 @@ document.getElementById("player-2-ultimate-button").addEventListener("click", fu
 
    let genghisKhanImage = document.createElement("img");
    genghisKhanImage.src = "images/genghiskhan.png";
+   genghisKhanImage.id = "genghiskhanultimate";
    genghisKhanImage.style.cssText = "width: 100%;";
 
    document.getElementById(squareName).appendChild(genghisKhanImage);
@@ -743,16 +745,32 @@ function activateDoctorStrangeUltimate(doctorStrangeBoardMoves, doctorStrangePla
     let index2 = (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2]).replace("square","");
     index1 = index1.replace("genghiskhan", "");
     index2 = index2.replace("genghiskhan", "");
-    console.log(index1);
-
 
     bunnyTurtleBoard[index1] = "";
     bunnyTurtleBoard[index2] = "";
 
-
-    //the last two moves will disappear on the screen itself as well
-    document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1].replace("genghiskhan", "")).replaceChildren();
-    document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2].replace("genghiskhan","")).replaceChildren();
+    //if genghiskhan has not used his ultimate last move, then the last move will disappear off the screen
+    if (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1].includes("genghiskhan") == false) {
+      document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1].replace("genghiskhan", "")).replaceChildren();
+    }
+    //if genghiskhan did use his ultimate last move, then the genghiskhan image will be replaced by doctor strange image
+    else if (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-1].includes("genghiskhan") == true) {
+      let currentImage = document.getElementById("genghiskhanultimate");
+      let newImage = document.createElement("img");
+      newImage.src = "images/doctorstrange.png";
+      currentImage.src = newImage.src;
+    }
+    //if genghiskhan has not used his ultimate second to last move, then the second to last move will disappear off the screen
+    if (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2].includes("genghiskhan") == false) {
+      document.getElementById(doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2].replace("genghiskhan","")).replaceChildren();
+    }
+    //if genghiskhan did use his ultimate second to last move, then the genghiskhan image will be replaced by doctor strange image
+    else if (doctorStrangeBoardMoves[doctorStrangeBoardMoves.length-2].includes("genghiskhan") == true) {
+      let currentImage = document.getElementById("genghiskhanultimate");
+      let newImage = document.createElement("img");
+      newImage.src = "images/doctorstrange.png";
+      currentImage.src = newImage.src;
+    }
 
     //time goes back last two moves, which means reversing opponent's last move and doctor strange's last
     //move. this means that it is doctor strange's turn. 
